@@ -4,8 +4,15 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const request = require("request");
 const path = require("path");
-
+const fs = require('fs');
 const dotenv = require("dotenv")
+
+const https = require('https');
+const privateKey  = fs.readFileSync('/etc/letsencrypt/live/btc.cdn.playfullscreen.com/privkey.pem');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/btc.cdn.playfullscreen.com/fullchain.pem');
+
+const credentials = {key: privateKey, cert: certificate};
+
 dotenv.config()
 console.log(process.env.TWILIO_MESSAGESID)
 
@@ -33,12 +40,12 @@ const userController = require('./controllers/users-controller.js');
 
 // Init Supertokens
 const apiPort = process.env.REACT_APP_API_PORT || 3001;
-const apiDomain = process.env.REACT_APP_API_URL || `https://api.playfullscreen.a2hosted.com`;
+const apiDomain = process.env.REACT_APP_API_URL || `https://btc.cdn.playfullscreen.com:3001`;
 const websitePort = process.env.REACT_APP_WEBSITE_PORT || 3000;
 const websiteDomain =
-  process.env.REACT_APP_WEBSITE_URL || `https://playfullscreen.a2hosted.com`;
+  process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com`;
 const laravelApi =
-  process.env.LARAVEL_API || `https://dashboard.playfullscreen.a2hosted.com`;
+  process.env.LARAVEL_API || `https://btc.cdn.playfullscreen.com`;
 const connectionURI = process.env.SUPERTOKEN_CONNECTION_URI;
 const apiKey = process.env.SUPERTOKEN_API_KEY;
 const twilioAccountSid = process.env.TWILIO_ACCOUNTSID;
@@ -136,19 +143,29 @@ supertokens.init({
 
 const app = express();
 
-app.use(
-  cors({
-    origin: websiteDomain,
-    // allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
-    methods: ["GET", "PUT", "POST", "DELETE"],
-    credentials: true,
-  })
-);
+var httpsServer = https.createServer(credentials, app);
+// app.use(
+//   cors({
+//     origin: 'https://btc.cdn.playfullscreen.com',
+//     // allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
+//     methods: ["GET", "PUT", "POST", "DELETE"],
+//     credentials: false, // true,
+//   })
+// );
+app.use(cors(
+  {
+    "origin": "https://btc.cdn.playfullscreen.com/, https://player.castr.com/, https://api.playfullscreen.a2hosted.com/",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "credentials": true
+  }
+));
 
 app.use(morgan("dev"));
 app.use(
   helmet({
     contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
   })
 );
 app.use(express.urlencoded({ extended: false }))
@@ -168,12 +185,10 @@ app.get("/sessioninfo", verifySession(), async (req, res) => {
 app.use("/users", usersRouter);
 app.use("/videos", videosRouter);
 
-// if (process.env.NODE_ENV && process.env.NODE_ENV !== "development") {
-  app.use("/", express.static(path.join(__dirname, "public", "build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "public", "build", "index.html"));
-  });
-// }
+// app.use("/", express.static(path.join(__dirname, "public", "build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "public", "build", "index.html"));
+//   });
 
 app.use(errorHandler());
 
@@ -181,6 +196,6 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal error: " + err.message);
 });
 
-app.listen(apiPort, () =>
+httpsServer.listen(apiPort, () =>
   console.log(`API Server listening on port ${apiPort}`)
 );

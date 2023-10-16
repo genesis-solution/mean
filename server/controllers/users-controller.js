@@ -168,8 +168,8 @@ exports.getStripeSession = async (req, res) => {
               "type": type,
               "b_id": b_id
           },
-          success_url:"https://api.playfullscreen.a2hosted.com/success?session_id={CHECKOUT_SESSION_ID}",
-          cancel_url: "https://api.playfullscreen.a2hosted.com/cancel"
+          success_url:"https://btc.cdn.playfullscreen.com:3001/success?session_id={CHECKOUT_SESSION_ID}",
+          cancel_url: "https://btc.cdn.playfullscreen.com:3001cancel"
       });
       res.send({session_id: session.id})
   })();
@@ -211,7 +211,7 @@ exports.createInvoice = async (req, res) => {
     invoice: {
       amount,
       type: 'lightning',
-      webhook: 'https://api.playfullscreen.a2hosted.com/users/lightning/paid',
+      webhook: 'https://btc.cdn.playfullscreen.com:3001users/lightning/paid',
       secret
     }
   };
