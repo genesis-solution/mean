@@ -722,7 +722,7 @@ AdUi.prototype.createAdContainer = function () {
   this.assignControlAttributes(this.adContainerDiv, 'ima-ad-container');
   this.adContainerDiv.style.position = 'absolute';
   this.adContainerDiv.style.zIndex = 1111;
-  this.adContainerDiv.addEventListener('mouseover', this.showAdControls.bind(this), false);
+  this.adContainerDiv.addEventListener('mouseenter', this.showAdControls.bind(this), false);
   this.adContainerDiv.addEventListener('mouseleave', this.hideAdControls.bind(this), false);
   this.createControls();
   this.controller.injectAdContainerDiv(this.adContainerDiv);
@@ -732,7 +732,6 @@ AdUi.prototype.createAdContainer = function () {
  * Create the controls.
  */
 AdUi.prototype.createControls = function () {
-
   this.assignControlAttributes(this.controlsDiv, 'ima-controls-div');
   this.controlsDiv.style.width = '100%';
 
@@ -772,7 +771,7 @@ AdUi.prototype.createControls = function () {
   this.fullscreenDiv.addEventListener('click', this.onAdFullscreenClick.bind(this), false);
 
   this.adContainerDiv.appendChild(this.controlsDiv);
-
+  
   this.controlsDiv.appendChild(this.seekBarDiv);
   this.controlsDiv.appendChild(this.playPauseDiv);
   this.controlsDiv.appendChild(this.countdownDiv);
@@ -994,7 +993,6 @@ AdUi.prototype.onAllAdsCompleted = function () {
 AdUi.prototype.onLinearAdStart = function () {
   // Don't bump container when controls are shown
   this.removeClass(this.adContainerDiv, 'bumpable-ima-ad-container');
-  this.adContainerDiv.style.zIndex='1111';
 };
 
 /**
@@ -1006,7 +1004,6 @@ AdUi.prototype.onNonLinearAdLoad = function () {
   this.adContainerDiv.style.display = 'block';
   // Bump container when controls are shown
   this.addClass(this.adContainerDiv, 'bumpable-ima-ad-container');
-  this.adContainerDiv.style.zIndex='2';
 };
 
 AdUi.prototype.onPlayerEnterFullscreen = function () {
@@ -1052,13 +1049,7 @@ AdUi.prototype.showAdControls = function () {
  * Hide the ad controls.
  */
 AdUi.prototype.hideAdControls = function () {
-
-  var cls = this.playPauseDiv.className;
-  if(cls.indexOf('ima-paused')>0) {
-	this.addClass(this.controlsDiv, 'ima-controls-div-showing');
-  } else {
-	  this.removeClass(this.controlsDiv, 'ima-controls-div-showing');
-  }
+  this.removeClass(this.controlsDiv, 'ima-controls-div-showing');
 };
 
 /**
@@ -1137,7 +1128,7 @@ AdUi.prototype.setShowCountdown = function (showCountdownIn) {
 };
 
 var name = "videojs-ima";
-var version = "1.8.1";
+var version = "1.8.0";
 var license = "Apache-2.0";
 var main = "./dist/videojs.ima.js";
 var module$1 = "./dist/videojs.ima.es.js";
@@ -1146,9 +1137,8 @@ var engines = { "node": ">=0.8.0" };
 var scripts = { "contBuild": "watch 'npm run rollup:max' src", "predevServer": "echo \"Starting up server on localhost:8000.\"", "devServer": "npm-run-all -p testServer contBuild", "lint": "eslint \"src/*.js\"", "rollup": "npm-run-all rollup:*", "rollup:max": "rollup -c configs/rollup.config.js", "rollup:es": "rollup -c configs/rollup.config.es.js", "rollup:min": "rollup -c configs/rollup.config.min.js", "pretest": "npm run rollup", "start": "npm run devServer", "test": "npm-run-all test:*", "test:vjs5": "npm install video.js@5.19.2 --no-save && npm-run-all -p -r testServer webdriver", "test:vjs6": "npm install video.js@6 --no-save && npm-run-all -p -r testServer webdriver", "test:vjs7": "npm install video.js@7 --no-save && npm-run-all -p -r testServer webdriver", "testServer": "http-server --cors -p 8000 --silent", "preversion": "node scripts/preversion.js && npm run lint && npm test", "version": "node scripts/version.js", "postversion": "node scripts/postversion.js", "webdriver": "mocha test/webdriver/*.js --no-timeouts" };
 var repository = { "type": "git", "url": "https://github.com/googleads/videojs-ima" };
 var files = ["CHANGELOG.md", "LICENSE", "README.md", "dist/", "src/"];
-var peerDependencies = { "video.js": "^5.19.2 || ^6 || ^7" };
-var dependencies = { "can-autoplay": "^3.0.0", "cryptiles": "^4.1.3", "extend": ">=3.0.2", "lodash": ">=4.17.19", "lodash.template": ">=4.5.0", "videojs-contrib-ads": "^6.6.5" };
-var devDependencies = { "video.js": "^5.19.2 || ^6 || ^7", "babel-core": "^6.26.3", "babel-preset-env": "^1.7.0", "child_process": "^1.0.2", "chromedriver": "^84.0.0", "conventional-changelog-cli": "^2.0.31", "conventional-changelog-videojs": "^3.0.0", "eslint": "^4.19.1", "eslint-config-google": "^0.9.1", "eslint-plugin-jsdoc": "^3.15.1", "geckodriver": "^1.19.1", "http-server": "^0.12.3", "mocha": "^7.1.2", "npm-run-all": "^4.1.5", "path": "^0.12.7", "protractor": "^6.0.0", "rimraf": "^2.7.1", "rollup": "^0.51.8", "rollup-plugin-babel": "^3.0.7", "rollup-plugin-copy": "^0.2.3", "rollup-plugin-json": "^2.3.1", "rollup-plugin-uglify": "^2.0.1", "selenium-webdriver": "^3.6.0", "uglify-es": "^3.3.9", "watch": "^1.0.2", "webdriver-manager": "^12.1.7" };
+var dependencies = { "can-autoplay": "^3.0.0", "cryptiles": "^4.1.2", "extend": ">=3.0.2", "lodash": ">=4.17.13", "lodash.template": ">=4.5.0", "video.js": "^5.19.2 || ^6 || ^7", "videojs-contrib-ads": "^6" };
+var devDependencies = { "babel-core": "^6.26.3", "babel-preset-env": "^1.7.0", "child_process": "^1.0.2", "chromedriver": "^2.35.0", "conventional-changelog-cli": "^2.0.21", "conventional-changelog-videojs": "^3.0.0", "eslint": "^4.11.0", "eslint-config-google": "^0.9.1", "eslint-plugin-jsdoc": "^3.2.0", "geckodriver": "^1.16.2", "http-server": "^0.10.0", "mocha": "^5.0.3", "npm-run-all": "^4.1.2", "path": "^0.12.7", "rimraf": "^2.6.2", "rollup": "^0.51.8", "rollup-plugin-babel": "^3.0.3", "rollup-plugin-copy": "^0.2.3", "rollup-plugin-json": "^2.3.0", "rollup-plugin-uglify": "^2.0.1", "selenium-webdriver": "^3.6.0", "uglify-es": "^3.1.10", "watch": "^1.0.2" };
 var keywords = ["videojs", "videojs-plugin"];
 var pkg = {
 	name: name,
@@ -1161,7 +1151,6 @@ var pkg = {
 	scripts: scripts,
 	repository: repository,
 	files: files,
-	peerDependencies: peerDependencies,
 	dependencies: dependencies,
 	devDependencies: devDependencies,
 	keywords: keywords
@@ -1377,8 +1366,6 @@ SdkImpl.prototype.requestAds = function () {
   adsRequest.setAdWillAutoPlay(this.controller.adsWillAutoplay());
   adsRequest.setAdWillPlayMuted(this.controller.adsWillPlayMuted());
 
-  
-
   // Populate the adsRequestproperties with those provided in the AdsRequest
   // object in the settings.
   var providedAdsRequest = this.controller.getSettings().adsRequest;
@@ -1453,7 +1440,7 @@ SdkImpl.prototype.onAdsManagerLoaded = function (adsManagerLoadedEvent) {
  * Listener for errors fired by the AdsLoader.
  * @param {google.ima.AdErrorEvent} event The error event thrown by the
  *     AdsLoader. See
- *     https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/reference/js/google.ima.AdError#.Type
+ *     https://developers.google.com/interactive-media-ads/docs/sdks/html5/v3/apis#ima.AdError.Type
  */
 SdkImpl.prototype.onAdsLoaderError = function (event) {
   window.console.warn('AdsLoader error: ' + event.getError());
@@ -1849,7 +1836,7 @@ SdkImpl.prototype.playAdBreak = function () {
 /**
  * Ads an EventListener to the AdsManager. For a list of available events,
  * see
- * https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/reference/js/google.ima.AdEvent#.Type
+ * https://developers.google.com/interactive-media-ads/docs/sdks/html5/v3/apis#ima.AdEvent.Type
  * @param {google.ima.AdEvent.Type} event The AdEvent.Type for which to
  *     listen.
  * @param {callback} callback The method to call when the event is fired.
@@ -2501,7 +2488,7 @@ Controller.prototype.playAdBreak = function () {
 /**
  * Ads an EventListener to the AdsManager. For a list of available events,
  * see
- * https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/reference/js/google.ima.AdEvent#.Type
+ * https://developers.google.com/interactive-media-ads/docs/sdks/html5/v3/apis#ima.AdEvent.Type
  * @param {google.ima.AdEvent.Type} event The AdEvent.Type for which to
  *     listen.
  * @param {callback} callback The method to call when the event is fired.
@@ -2687,7 +2674,7 @@ var ImaPlugin = function ImaPlugin(player, options) {
   /**
    * Ads an EventListener to the AdsManager. For a list of available events,
    * see
-   * https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/reference/js/google.ima.AdEvent#.Type
+   * https://developers.google.com/interactive-media-ads/docs/sdks/html5/v3/apis#ima.AdEvent.Type
    * @param {google.ima.AdEvent.Type} event The AdEvent.Type for which to
    *     listen.
    * @param {callback} callback The method to call when the event is fired.
@@ -2820,6 +2807,3 @@ registerPlugin('ima', init);
 return ImaPlugin;
 
 })));
-
-
-
