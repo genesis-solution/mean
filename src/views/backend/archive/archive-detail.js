@@ -62,10 +62,10 @@ const ArchiveDetails = ({
           },
           function onPlayerReady() {
             console.log("Player Ready!");
-            // player.nuevo({
-            //   title: archiveinfo.name,
-            //   video_id: "This is video Id",
-            // });
+            player.nuevo({
+              title: archiveinfo.name,
+              // video_id: "This is video Id",
+            });
 
             var callback = function (videojsPlayer, hlsjs) {
               hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
