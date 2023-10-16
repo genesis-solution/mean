@@ -1137,7 +1137,7 @@ exports.getArchiveInfo = async (req, res) => {
   let { id, type } = req.body;
   const user_id = req.session.getUserId();
   
-  id = Buffer.from(id, 'base64').toString('utf-8');
+  //id = Buffer.from(id, 'base64').toString('utf-8');
   
   User.purchaseVideoState(user_id, id, (err, purchased) => {
     if (purchased) {
