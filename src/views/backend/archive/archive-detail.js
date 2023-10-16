@@ -52,40 +52,40 @@ const ArchiveDetails = ({
       }
       else
       {
-        // player = videojs(
-        //   videoContainer.current,
-        //   {
-        //     controls: true,
-        //     preload: true,
-        //     playsinilie: true,
-        //     autoplay: true,
-        //   },
-        //   function onPlayerReady() {
-        //     console.log("Player Ready!");
-
-        //     var callback = function (videojsPlayer, hlsjs) {
-        //       hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
-        //         console.log("Media attached");
-        //       });
-        //     };
-
-        //     videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
-        //     player.src({
-        //       src: archiveinfo.hlsUrl,
-        //       type: "application/x-mpegURL",
-        //       poster: archiveinfo.poster,
-        //     });
-        //   }
-        // );
-        player = videoContainer.current
-
         const nuevoOptions = {
           logo: "https://nvd.nuevodevel.com/img/logo_small.png",
           logourl: "https://www.nuevodevel.com/nuevo/order",
           //title: archiveinfo.name,
           //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
-        player.nuevo(nuevoOptions);
+        player = videojs(
+          videoContainer.current,
+          {
+            controls: true,
+            preload: true,
+            playsinilie: true,
+            autoplay: true,
+          },
+          function onPlayerReady() {
+            console.log("Player Ready!");
+
+            player.nuevo(nuevoOptions);
+
+            var callback = function (videojsPlayer, hlsjs) {
+              hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
+                console.log("Media attached");
+              });
+            };
+
+            videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
+            player.src({
+              src: archiveinfo.hlsUrl,
+              type: "application/x-mpegURL",
+              poster: archiveinfo.poster,
+            });
+          }
+        );
+
       }
     }
   }, [archiveinfo]);
