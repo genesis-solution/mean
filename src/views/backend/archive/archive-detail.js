@@ -62,10 +62,6 @@ const ArchiveDetails = ({
           },
           function onPlayerReady() {
             console.log("Player Ready!");
-            player.nuevo({
-              title: archiveinfo.name,
-              // video_id: "This is video Id",
-            });
 
             var callback = function (videojsPlayer, hlsjs) {
               hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
@@ -81,6 +77,14 @@ const ArchiveDetails = ({
             });
           }
         );
+
+        const nuevoOptions = {
+          logo: "https://nvd.nuevodevel.com/img/logo_small.png",
+          logourl: "https://www.nuevodevel.com/nuevo/order",
+          //title: archiveinfo.name,
+          //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
+        };
+        player.nuevo(nuevoOptions);
       }
     }
   }, [archiveinfo]);
