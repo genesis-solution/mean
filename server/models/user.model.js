@@ -174,7 +174,7 @@ User.updateBalanceById = (id, balance, result) => {
 User.purchaseVideoState = (sp_user_id, id, result) => {
 
   sql.query(
-    `SELECT B.broadcaster_id, B.package_id, B.id, A.name, B.uses FROM videos A, purchase B WHERE A.broadcaster_id=B.broadcaster_id AND B.archive AND (A.hlsurl='${id}' OR A.poster='${id}') AND B.sp_user_id='${sp_user_id}' AND B.expiry_date > NOW() ORDER BY id DESC LIMIT 1;`,
+    `SELECT B.broadcaster_id, B.package_id, B.id, A.name, B.uses FROM videos A, purchase B WHERE A.broadcaster_id=B.broadcaster_id AND B.archive AND (A.hlsurl='${id}' OR A.poster='${id}') AND B.sp_user_id='${sp_user_id}' ORDER BY id DESC LIMIT 1;`, //  AND B.expiry_date > NOW()
         (err, res) => {
         if (err) {
           console.log("update balance by id error: ", err);
