@@ -154,7 +154,7 @@ var httpsServer = https.createServer(credentials, app);
 // );
 app.use(cors(
   {
-    "origin": "https://btc.cdn.playfullscreen.com/, https://player.castr.com/, https://api.playfullscreen.a2hosted.com/",
+    "origin": ["https://btc.cdn.playfullscreen.com, https://player.castr.com"],
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
     "credentials": true
