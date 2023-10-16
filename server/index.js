@@ -144,22 +144,22 @@ supertokens.init({
 const app = express();
 
 var httpsServer = https.createServer(credentials, app);
-// app.use(
-//   cors({
-//     origin: 'https://btc.cdn.playfullscreen.com',
-//     // allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
-//     methods: ["GET", "PUT", "POST", "DELETE"],
-//     credentials: false, // true,
-//   })
-// );
-app.use(cors(
-  {
-    "origin": ["https://btc.cdn.playfullscreen.com", "https://player.castr.com"],
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "credentials": true
-  }
-));
+app.use(
+  cors({
+    origin: 'https://btc.cdn.playfullscreen.com',
+    // allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
+    methods: ["GET", "PUT", "POST", "DELETE"],
+    credentials: false, // true,
+  })
+);
+// app.use(cors(
+//   {
+//     "origin": ["https://btc.cdn.playfullscreen.com", "https://player.castr.com"],
+//     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     "preflightContinue": false,
+//     "credentials": true
+//   }
+// ));
 
 app.use(morgan("dev"));
 app.use(
