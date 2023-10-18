@@ -86,12 +86,12 @@ const ArchiveDetails = ({
           }
         );
 
-      }
-    }
-
-    return () => {
-      if (player) {
-        player.dispose();
+        return () => {
+          if (player) {
+            player.dispose();
+          }
+        }
+        
       }
     }
   }, [archiveinfo]);
