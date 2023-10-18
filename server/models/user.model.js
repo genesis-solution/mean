@@ -351,7 +351,7 @@ User.purchase = (u_id, metadata, result) => {
             console.log(formattedDatetime)
             
             connection.query(`INSERT INTO purchase (sp_user_id, broadcaster_id, broadcast_id, package_id, uses, live, archive, unlimited, price, tax, lightning, created_at, expiry_date) VALUES 
-              ('${u_id}', ${pk.broadcaster_id}, ${metadata.type=='live'?metadata.b_id:0}, ${metadata.p_id}, ${pk.uses_left}, ${metadata.type=='live'? 1: 0}, ${metadata.type=='archive'? 1: 0}, '', ${metadata.lightning? metadata.sats:pk.price}, ${metadata.lightning? 0: 0.5}, ${metadata.lightning? 1: 0}, NOW(), '${formattedDatetime}')`, (error, datas) => {
+              ('${u_id}', ${pk.broadcaster_id}, ${metadata.type=='live'?metadata.b_id:0}, ${metadata.p_id}, ${pk.uses_left}, ${metadata.type=='live'? 1: 0}, ${metadata.type=='archive'? 1: 0}, 0, ${metadata.lightning? metadata.sats:pk.price}, ${metadata.lightning? 0: 0.5}, ${metadata.lightning? 1: 0}, NOW(), '${formattedDatetime}')`, (error, datas) => {
               if (error) {
                 throw error;
               }
