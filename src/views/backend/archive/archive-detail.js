@@ -28,7 +28,7 @@ const ArchiveDetails = ({
   clearArchiveInfo,
 }) => {
   let player = useRef();
-  let videoContainer = useRef();
+  let videoContainer = useRef(null);
 
   const history = useHistory();
 
@@ -53,9 +53,9 @@ const ArchiveDetails = ({
       else
       {
         const nuevoOptions = {
-          logo: "https://nvd.nuevodevel.com/img/logo_small.png",
-          logourl: "https://www.nuevodevel.com/nuevo/order",
-          //title: archiveinfo.name,
+          // logo: "https://nvd.nuevodevel.com/img/logo_small.png",
+          // logourl: "https://www.nuevodevel.com/nuevo/order",
+          title: archiveinfo.title,
           //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
         player = videojs(
@@ -69,8 +69,6 @@ const ArchiveDetails = ({
           function onPlayerReady() {
             console.log("Player Ready!");
 
-            player.nuevo(nuevoOptions);
-
             var callback = function (videojsPlayer, hlsjs) {
               hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
                 console.log("Media attached");
@@ -83,9 +81,17 @@ const ArchiveDetails = ({
               type: "application/x-mpegURL",
               poster: archiveinfo.poster,
             });
+
+            player.nuevo(nuevoOptions);
           }
         );
 
+      }
+    }
+
+    return () => {
+      if (player) {
+        player.dispose();
       }
     }
   }, [archiveinfo]);
