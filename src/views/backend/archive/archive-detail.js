@@ -27,7 +27,7 @@ const ArchiveDetails = ({
   getArchiveInfo,
   clearArchiveInfo,
 }) => {
-  let player = useRef();
+  let player = useRef(null);
   let videoContainer = useRef(null);
 
   const history = useHistory();
@@ -38,15 +38,16 @@ const ArchiveDetails = ({
     
     getArchiveInfo({ id, type:'archive' });
     return () => {
-      if (archiveinfo) {
+      if (player && archiveinfo) {
         player.dispose();
+        player.current = null;
       }
       clearArchiveInfo();
     };
-  }, []);
+  }, [player]);
 
   useEffect(() => {
-    if (archiveinfo) {
+    if (videoContainer && archiveinfo) {
       if (!archiveinfo.purchased) {
         history.push('/pricing-plan?hlsurl='+archiveinfo.hlsUrl+'&type=archive');
       }
@@ -88,7 +89,7 @@ const ArchiveDetails = ({
 
       }
     }
-  }, [archiveinfo]);
+  }, [ videoContainer, archiveinfo]);
 
   return (
     <>
