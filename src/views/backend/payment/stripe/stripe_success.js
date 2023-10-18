@@ -20,7 +20,7 @@ const StripeSuccess = (props) => {
     }
 
     const lightningUrl = process.env.REACT_APP_LIGHTNING_URL || "https://lightning.playfullscreen.a2hosted.com";
-    const backendUrl = process.env.REACT_APP_API_URL || "https://api.playfullscreen.a2hosted.com";
+    const backendUrl = process.env.REACT_APP_API_URL || "https://btc.cdn.playfullscreen.com:3001";
 
     const getCheckoutDetail = async () => {
         fetch(backendUrl+"/users/stripe/saveCheckoutDetail", {

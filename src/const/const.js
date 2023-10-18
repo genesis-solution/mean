@@ -1,4 +1,3 @@
-// export const baseurl = "https://api.playfullscreen.a2hosted.com";
 export const baseurl = "https://btc.cdn.playfullscreen.com:3001";
 // export const baseurl = process.env.BASE_URL || "http://localhost:3001";
 export const lightningUrl = "https://lightning.playfullscreen.a2hosted.com";

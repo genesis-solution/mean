@@ -23,3 +23,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/server/*.env
+/*.env
+/.env.development.local
+/.env.production.local

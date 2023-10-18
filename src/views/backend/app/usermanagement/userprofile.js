@@ -15,7 +15,7 @@ import UserAvatar from '../../../../components/User/useravatar';
 import { useHistory } from "react-router-dom";
 
 export function getApiDomain() {
-    const apiUrl = process.env.REACT_APP_API_URL || `https://api.playfullscreen.a2hosted.com`;
+    const apiUrl = process.env.REACT_APP_API_URL || `https://btc.cdn.playfullscreen.com:3001`;
     return apiUrl;
 }
 

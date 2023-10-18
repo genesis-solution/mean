@@ -25,12 +25,12 @@ import  './assets/css/custom.css';
 import { ToastContainer } from 'react-toast'
 
 export function getApiDomain() {
-  const apiUrl = process.env.REACT_APP_API_URL || `https://api.playfullscreen.a2hosted.com`;
+  const apiUrl = process.env.REACT_APP_API_URL || `https://btc.cdn.playfullscreen.com:3001`;
   return apiUrl;
 }
 
 export function getWebsiteDomain() {
-  const websiteUrl = process.env.REACT_APP_WEBSITE_URL || `https://api.playfullscreen.a2hosted.com`;
+  const websiteUrl = process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com`;
   return websiteUrl;
 }
 
