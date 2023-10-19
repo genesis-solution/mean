@@ -91,7 +91,7 @@ const ArchiveDetails = ({
           archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
         );
 
-        player.nuevo(nuevoOptions);
+        player.nuevo();
 
         var callback = function (videojsPlayer, hlsjs) {
           hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
@@ -116,7 +116,7 @@ const ArchiveDetails = ({
 
       }
     }
-  }, [ videoContainer, archiveinfo]);
+  }, [ archiveinfo]);
 
   return (
     <>
