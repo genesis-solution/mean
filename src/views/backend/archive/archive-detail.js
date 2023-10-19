@@ -88,10 +88,10 @@ const ArchiveDetails = ({
         );
         
         player.poster(
-          "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
+          archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
         );
 
-        // player.nuevo(nuevoOptions);
+        player.nuevo(nuevoOptions);
 
         var callback = function (videojsPlayer, hlsjs) {
           hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
