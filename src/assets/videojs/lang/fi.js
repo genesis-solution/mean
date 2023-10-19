@@ -52,6 +52,8 @@ videojs.addLanguage("fi",{
   "Skip Ad in %%TIME%%": "Skip in %%TIME%%",
   "Skip Ad": "Skip Ad",
   "Snapshot": "Snapshot",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing" 
 });
