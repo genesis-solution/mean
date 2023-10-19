@@ -22,6 +22,8 @@ import { useLayoutEffect } from "react";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
+// const registerPlugin = videojs.registerPlugin || videojs.plugin;
+// registerPlugin('nuevo', nuevo);
 
 const ArchiveDetails = ({
   archiveinfo,
