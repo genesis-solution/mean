@@ -75,7 +75,7 @@ const ArchiveDetails = ({
           //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
         this.player = videojs(
-          this.videoContainer.current,
+          videoContainer.current,
           {
             controls: true,
             preload: true,
