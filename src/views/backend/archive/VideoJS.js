@@ -1,6 +1,6 @@
 import React from 'react';
 import videojs from 'video.js';
-import "../../../assets/videojs/components/nuevo.js";
+import "./nuevo.js";
 
 export const VideoJS = (props) => {
   const videoRef = React.useRef(null);
