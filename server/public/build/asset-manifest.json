@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.048ced17.css",
-    "main.js": "/static/js/main.11fa5ef2.js",
+    "main.css": "/static/css/main.3ed706ca.css",
+    "main.js": "/static/js/main.906be7e0.js",
     "static/js/787.f07fd7e7.chunk.js": "/static/js/787.f07fd7e7.chunk.js",
     "static/media/remixicon.svg?t=1568552893872": "/static/media/remixicon.53c56a2229f782675a80.svg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.1996d4ba5f97d8d2aa16.svg",
@@ -13,7 +13,6 @@
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
     "static/media/remixicon.woff?t=1568552893872": "/static/media/remixicon.a7ed33c4fc7098572d9e.woff",
     "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
-    "static/media/nostr-logo.png": "/static/media/nostr-logo.9f712c266d13c6142e45.png",
     "static/media/remixicon.woff2?t=1568552893872": "/static/media/remixicon.6e82901d5c6eb305f60c.woff2",
     "static/media/texure.jpg": "/static/media/texure.6cd0e4aaa8bd24c2b488.jpg",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
@@ -28,12 +27,12 @@
     "static/media/coinos_logo.png": "/static/media/coinos_logo.8223c3ad0d4d9fb7cfde.png",
     "static/media/HelveticaNeueBold.woff": "/static/media/HelveticaNeueBold.9746238261ff2fd4644a.woff",
     "index.html": "/index.html",
-    "main.048ced17.css.map": "/static/css/main.048ced17.css.map",
-    "main.11fa5ef2.js.map": "/static/js/main.11fa5ef2.js.map",
+    "main.3ed706ca.css.map": "/static/css/main.3ed706ca.css.map",
+    "main.906be7e0.js.map": "/static/js/main.906be7e0.js.map",
     "787.f07fd7e7.chunk.js.map": "/static/js/787.f07fd7e7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.048ced17.css",
-    "static/js/main.11fa5ef2.js"
+    "static/css/main.3ed706ca.css",
+    "static/js/main.906be7e0.js"
   ]
 }
