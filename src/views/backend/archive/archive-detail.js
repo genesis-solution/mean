@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useLayoutEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -6,19 +6,15 @@ import { useHistory } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.css";
-
+import { videoActions } from "../../../store/video";
+import { thumbUrl } from "../../../const/const";
 //video.js player
 import "../../../assets/videojs/skins/shaka/videojs.min.css";
 import Hls from "hls.js";
 import videojs from "video.js";
-import "../../../assets/videojs/components/cjs/hlsjs.js";
-import "../../../assets/videojs/components/cjs/nuevo.js";
-
 import "../../../assets/videojs/components/videojs.events.js";
-
-import { videoActions } from "../../../store/video";
-import { thumbUrl } from "../../../const/const";
-import { useLayoutEffect } from "react";
+import "../../../assets/videojs/components/hlsjs.js";
+import "../../../assets/videojs/components/cjs/nuevo.js";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
