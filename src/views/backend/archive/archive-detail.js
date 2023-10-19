@@ -11,16 +11,14 @@ import "swiper/swiper-bundle.css";
 import "../../../assets/videojs/skins/shaka/videojs.min.css";
 import Hls from "hls.js";
 import videojs from "video.js";
-
-import "../../../assets/videojs/components/hlsjs.js";
-//import "./nuevo.js";
+import "../../../assets/videojs/components/cjs/hlsjs.js";
+import "../../../assets/videojs/components/cjs/nuevo.js";
 
 import "../../../assets/videojs/components/videojs.events.js";
 
 import { videoActions } from "../../../store/video";
 import { thumbUrl } from "../../../const/const";
 import { useLayoutEffect } from "react";
-import VideoJS from './VideoJS'
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -34,32 +32,6 @@ const ArchiveDetails = ({
   let videoContainer = useRef(null);
 
   const history = useHistory();
-
-  const playerRef = React.useRef(null);
-
-  const videoJsOptions = {
-    autoplay: true,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    sources: [{
-      src: '../../../assets/video/sample-video.mp4',
-      type: 'video/mp4'
-    }]
-  };
-
-  const handlePlayerReady = (player) => {
-    playerRef.current = player;
-
-    // You can handle player events here, for example:
-    player.on('waiting', () => {
-      videojs.log('player is waiting');
-    });
-
-    player.on('dispose', () => {
-      videojs.log('player will dispose');
-    });
-  };
 
   useLayoutEffect(() => {
     const currentUrl = window.location.href;
@@ -151,7 +123,6 @@ const ArchiveDetails = ({
 
   return (
     <>
-    <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
       <div className="video-container iq-main-slider" data-vjs-player>
         <video className="video-js vjs-fluid" id='my-player'></video>
       </div>
