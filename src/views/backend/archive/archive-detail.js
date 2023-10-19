@@ -12,7 +12,7 @@ import { thumbUrl } from "../../../const/const";
 import "../../../assets/videojs/skins/shaka/videojs.min.css";
 import Hls from "hls.js";
 import videojs from "video.js";
-import "../../../assets/videojs/components/videojs.events.js";
+//import "../../../assets/videojs/components/videojs.events.js";
 //import "../../../assets/videojs/components/hlsjs.js";
 import "../../../assets/videojs/components/nuevo.js";
 
