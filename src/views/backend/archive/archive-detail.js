@@ -14,7 +14,7 @@ import Hls from "hls.js";
 import videojs from "video.js";
 //import "../../../assets/videojs/components/videojs.events.js";
 //import "../../../assets/videojs/components/hlsjs.js";
-import "../../../assets/videojs/components/nuevo.js";
+import "../../../assets/videojs/components/cjs/nuevo.js";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
