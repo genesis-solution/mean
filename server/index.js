@@ -185,10 +185,10 @@ app.get("/sessioninfo", verifySession(), async (req, res) => {
 app.use("/users", usersRouter);
 app.use("/videos", videosRouter);
 
-// app.use("/", express.static(path.join(__dirname, "public", "build")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "public", "build", "index.html"));
-//   });
+app.use("/", express.static(path.join(__dirname, "public", "build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "public", "build", "index.html"));
+  });
 
 app.use(errorHandler());
 
