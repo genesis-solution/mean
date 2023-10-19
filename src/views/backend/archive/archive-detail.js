@@ -38,13 +38,13 @@ const ArchiveDetails = ({
     const id = currentUrl.split('/').pop();
     
     getArchiveInfo({ id, type:'archive' });
-    return () => {
-      if (player && archiveinfo) {
-        player.dispose();
-        // player.current = null;
-      }
-      clearArchiveInfo();
-    };
+    // return () => {
+    //   if (player && archiveinfo) {
+    //     player.dispose();
+    //     // player.current = null;
+    //   }
+    //   clearArchiveInfo();
+    // };
   }, [])
 
   // useEffect(() => {
@@ -105,6 +105,14 @@ const ArchiveDetails = ({
           type: "application/x-mpegURL",
           poster: archiveinfo.poster,
         });
+
+        return () => {
+          if (player && archiveinfo) {
+            player.dispose();
+            // player.current = null;
+          }
+          clearArchiveInfo();
+        };
 
       }
     }
