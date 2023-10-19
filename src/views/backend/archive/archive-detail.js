@@ -75,7 +75,7 @@ const ArchiveDetails = ({
           //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
         this.player = videojs(
-          videoContainer.current,
+          this.videoContainer.current,
           {
             controls: true,
             preload: true,
@@ -113,7 +113,7 @@ const ArchiveDetails = ({
   return (
     <>
       <div className="video-container iq-main-slider" data-vjs-player>
-        <video className="video-js vjs-fluid" ref={(node) => (this.videoContainer = node)}></video>
+        <video className="video-js vjs-fluid" ref={(node) => (videoContainer = node)}></video>
       </div>
       <div className="main-content movi">
         <section className="movie-detail container-fluid">
