@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useLayoutEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -14,7 +14,7 @@ import Hls from "hls.js";
 import videojs from "video.js";
 import "../../../assets/videojs/components/videojs.events.js";
 import "../../../assets/videojs/components/hlsjs.js";
-import "../../../assets/videojs/components/cjs/nuevo.js";
+import "../../../assets/videojs/components/nuevo.js";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -29,33 +29,19 @@ const ArchiveDetails = ({
 
   const history = useHistory();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const currentUrl = window.location.href;
     const id = currentUrl.split('/').pop();
     
     getArchiveInfo({ id, type:'archive' });
-    // return () => {
-    //   if (player && archiveinfo) {
-    //     player.dispose();
-    //     // player.current = null;
-    //   }
-    //   clearArchiveInfo();
-    // };
-  }, [])
-
-  // useEffect(() => {
-  //   const currentUrl = window.location.href;
-  //   const id = currentUrl.split('/').pop();
-    
-  //   getArchiveInfo({ id, type:'archive' });
-  //   return () => {
-  //     if (player && archiveinfo) {
-  //       player.dispose();
-  //       // player.current = null;
-  //     }
-  //     clearArchiveInfo();
-  //   };
-  // }, []);
+    return () => {
+      if (player && archiveinfo) {
+        player.dispose();
+        // player.current = null;
+      }
+      clearArchiveInfo();
+    };
+  }, []);
 
   useEffect(() => {
     if (archiveinfo) {
@@ -65,15 +51,12 @@ const ArchiveDetails = ({
       else
       {
         const nuevoOptions = {
-          // logo: "https://nvd.nuevodevel.com/img/logo_small.png",
-          // logourl: "https://www.nuevodevel.com/nuevo/order",
           title: archiveinfo.title,
-          //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
 
-        if (!player.current) {
+        if (!player.current && videoContainer) {
           player = videojs(
-            'my-player',
+            videoContainer.current,
             {
               controls: true,
               preload: true,
@@ -82,45 +65,37 @@ const ArchiveDetails = ({
             },
             function onPlayerReady() {
               console.log("Player Ready!");
+
+              player.poster(
+                archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
+              );
+    
+              player.nuevo(nuevoOptions);
+    
+              var callback = function (player, hlsjs) {
+                hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
+                  console.log("Media attached");
+                });
+              };
+              videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
+    
+              player.src({
+                src: archiveinfo.hlsUrl,
+                type: "application/x-mpegURL",
+                poster: archiveinfo.poster,
+              });
             }
           );
-          
-          player.poster(
-            archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
-          );
-
-          player.nuevo();
-
-          var callback = function (videojsPlayer, hlsjs) {
-            hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
-              console.log("Media attached");
-            });
-          };
-          videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
-
-          player.src({
-            src: archiveinfo.hlsUrl,
-            type: "application/x-mpegURL",
-            poster: archiveinfo.poster,
-          });
         }
-
-        return () => {
-          if (player && archiveinfo) {
-            player.dispose();
-            // player.current = null;
-          }
-          clearArchiveInfo();
-        };
 
       }
     }
-  }, [ archiveinfo]);
+  }, [ videoContainer, archiveinfo]);
 
   return (
     <>
       <div className="video-container iq-main-slider" data-vjs-player>
-        <video className="video-js vjs-fluid" id='my-player'></video>
+        <video className="video-js vjs-fluid" ref={videoContainer} id='my-player'></video>
       </div>
       <div className="main-content movi">
         <section className="movie-detail container-fluid">
