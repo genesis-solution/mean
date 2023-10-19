@@ -74,7 +74,7 @@ const ArchiveDetails = ({
           title: archiveinfo.title,
           //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
-        this.player = videojs(
+        player = videojs(
           videoContainer.current,
           {
             controls: true,
@@ -87,11 +87,11 @@ const ArchiveDetails = ({
           }
         );
         
-        this.player.poster(
+        player.poster(
           "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
         );
 
-        this.player.nuevo(nuevoOptions);
+        player.nuevo(nuevoOptions);
 
         var callback = function (videojsPlayer, hlsjs) {
           hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
@@ -100,7 +100,7 @@ const ArchiveDetails = ({
         };
         videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
 
-        this.player.src({
+        player.src({
           src: archiveinfo.hlsUrl,
           type: "application/x-mpegURL",
           poster: archiveinfo.poster,
@@ -113,7 +113,7 @@ const ArchiveDetails = ({
   return (
     <>
       <div className="video-container iq-main-slider" data-vjs-player>
-        <video className="video-js vjs-fluid" ref={(node) => (videoContainer = node)}></video>
+        <video className="video-js vjs-fluid" ref={videoContainer}></video>
       </div>
       <div className="main-content movi">
         <section className="movie-detail container-fluid">
