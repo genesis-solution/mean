@@ -13,11 +13,12 @@ import Hls from "hls.js";
 import videojs from "video.js";
 import "../../../assets/videojs/components/hlsjs.js";
 import "../../../assets/videojs/components/nuevo.js";
+
 import "../../../assets/videojs/components/videojs.events.js";
 
 import { videoActions } from "../../../store/video";
-
 import { thumbUrl } from "../../../const/const";
+import { useLayoutEffect } from "react";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -32,7 +33,7 @@ const ArchiveDetails = ({
 
   const history = useHistory();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentUrl = window.location.href;
     const id = currentUrl.split('/').pop();
     
@@ -40,14 +41,28 @@ const ArchiveDetails = ({
     return () => {
       if (player && archiveinfo) {
         player.dispose();
-        player.current = null;
+        // player.current = null;
       }
       clearArchiveInfo();
     };
-  }, [player]);
+  }, [])
+
+  // useEffect(() => {
+  //   const currentUrl = window.location.href;
+  //   const id = currentUrl.split('/').pop();
+    
+  //   getArchiveInfo({ id, type:'archive' });
+  //   return () => {
+  //     if (player && archiveinfo) {
+  //       player.dispose();
+  //       // player.current = null;
+  //     }
+  //     clearArchiveInfo();
+  //   };
+  // }, []);
 
   useEffect(() => {
-    if (videoContainer && archiveinfo) {
+    if (archiveinfo) {
       if (!archiveinfo.purchased) {
         history.push('/pricing-plan?hlsurl='+archiveinfo.hlsUrl+'&type=archive');
       }
@@ -59,7 +74,7 @@ const ArchiveDetails = ({
           title: archiveinfo.title,
           //logocontrolbar: "//nvd.nuevodevel.com/img/logo_small.png"
         };
-        player = videojs(
+        this.player = videojs(
           videoContainer.current,
           {
             controls: true,
@@ -69,23 +84,27 @@ const ArchiveDetails = ({
           },
           function onPlayerReady() {
             console.log("Player Ready!");
-
-            var callback = function (videojsPlayer, hlsjs) {
-              hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
-                console.log("Media attached");
-              });
-            };
-
-            videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
-            player.src({
-              src: archiveinfo.hlsUrl,
-              type: "application/x-mpegURL",
-              poster: archiveinfo.poster,
-            });
-
-            player.nuevo(nuevoOptions);
           }
         );
+        
+        this.player.poster(
+          "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
+        );
+
+        this.player.nuevo(nuevoOptions);
+
+        var callback = function (videojsPlayer, hlsjs) {
+          hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
+            console.log("Media attached");
+          });
+        };
+        videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
+
+        this.player.src({
+          src: archiveinfo.hlsUrl,
+          type: "application/x-mpegURL",
+          poster: archiveinfo.poster,
+        });
 
       }
     }
@@ -93,8 +112,8 @@ const ArchiveDetails = ({
 
   return (
     <>
-      <div className="video-container iq-main-slider">
-        <video className="video-js vjs-fluid" ref={videoContainer}></video>
+      <div className="video-container iq-main-slider" data-vjs-player>
+        <video className="video-js vjs-fluid" ref={(node) => (this.videoContainer = node)}></video>
       </div>
       <div className="main-content movi">
         <section className="movie-detail container-fluid">
