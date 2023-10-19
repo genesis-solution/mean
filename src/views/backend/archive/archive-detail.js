@@ -37,9 +37,13 @@ const ArchiveDetails = ({
     getArchiveInfo({ id, type:'archive' });
     return () => {
       if (player && archiveinfo) {
-        
+        const nuevoOptions = {
+          title: archiveinfo.title,
+        };
+        console.log('dispose')
+        player.nuevo(nuevoOptions)
         player.dispose();
-        player.nuevo()
+        
         // player.current = null;
       }
       clearArchiveInfo();
@@ -53,9 +57,7 @@ const ArchiveDetails = ({
       }
       else
       {
-        const nuevoOptions = {
-          title: archiveinfo.title,
-        };
+        
 
         if (!player.current && videoContainer) {
           player = videojs(
