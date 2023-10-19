@@ -111,7 +111,9 @@
   "Watch full video on": "Watch full video on" ,
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip in %%TIME%%",
-  "Skip Ad": "Átlépheti a reklámot",
+  "Skip Ad": "Skip Ad",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"

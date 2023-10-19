@@ -113,6 +113,8 @@ videojs.addLanguage("zh-CN",{
   "Skip Ad in %%TIME%%": "Skip Ad in %%TIME%%",
   "Skip Ad": "Skip Ad",
   "Snapshot": "Snapshot",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"  
 });

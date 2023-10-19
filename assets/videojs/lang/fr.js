@@ -109,6 +109,8 @@ videojs.addLanguage("fr",{
   "Casting to": "Lancer sur",
   "Skip Ad in %%TIME%%": "Passer dans %%TIME%%",
   "Skip Ad": "Passer l'annonce",
+  "Ad": "Pub",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "Snapshot": "Instantané",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"   

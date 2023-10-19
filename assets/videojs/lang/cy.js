@@ -1,5 +1,5 @@
 videojs.addLanguage("cy",{
-  "Audio Player":"Chwaraewr sain",
+   "Audio Player":"Chwaraewr sain",
   "Video Player":"Chwaraewr fideo",
   "Play":"Chwarae",
   "Pause":"Oedi",
@@ -82,6 +82,7 @@ videojs.addLanguage("cy",{
   "Beginning of dialog window. Escape will cancel and close the window.":"Dechrau ffenestr deialog. Bydd Escape yn canslo a chau'r ffenestr.",
   "End of dialog window.":"Diwedd ffenestr deialog.",
   "{1} is loading.": "{1} yn llwytho.",
+  
    "Quality": "Quality",
   "Settings": "Settings",
   "Related": "Related",
@@ -110,6 +111,8 @@ videojs.addLanguage("cy",{
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip in %%TIME%%",
   "Skip Ad": "Skip Ad",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%", 
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"  

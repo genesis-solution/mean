@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 7.21.1 <http://videojs.com/>
+ * Video.js 7.20.3 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/main/LICENSE>
@@ -50,7 +50,7 @@ var _inherits__default = /*#__PURE__*/_interopDefaultLegacy(_inherits);
 var _resolveUrl__default = /*#__PURE__*/_interopDefaultLegacy(_resolveUrl);
 var parseSidx__default = /*#__PURE__*/_interopDefaultLegacy(parseSidx);
 
-var version$5 = "7.21.1";
+var version$5 = "7.20.3";
 
 /**
  * An Object that contains lifecycle hooks as keys which point to an array
@@ -2899,8 +2899,7 @@ EventTarget$2.prototype.queueTrigger = function (event) {
   map["delete"](type);
   window__default['default'].clearTimeout(oldTimeout);
   var timeout = window__default['default'].setTimeout(function () {
-    map["delete"](type); // if we cleared out all timeouts for the current target, delete its map
-
+    // if we cleared out all timeouts for the current target, delete its map
     if (map.size === 0) {
       map = null;
       EVENT_MAP["delete"](_this);
@@ -28159,13 +28158,11 @@ Player.prototype.hasPlugin = function (name) {
  * @file extend.js
  * @module extend
  */
-var hasLogged = false;
 /**
  * Used to subclass an existing class by emulating ES subclassing using the
  * `extends` keyword.
  *
  * @function
- * @deprecated
  * @example
  * var MyComponent = videojs.extend(videojs.getComponent('Component'), {
  *   myCustomMethod: function() {
@@ -28186,14 +28183,6 @@ var hasLogged = false;
 var extend = function extend(superClass, subClassMethods) {
   if (subClassMethods === void 0) {
     subClassMethods = {};
-  }
-
-  // Log a warning the first time extend is called to note that it is deprecated
-  // It was previously deprecated in our documentation (guides, specifically),
-  // but was never formally deprecated in code.
-  if (!hasLogged) {
-    log$1.warn('videojs.extend is deprecated as of Video.js 7.22.0 and will be removed in Video.js 8.0.0');
-    hasLogged = true;
   }
 
   var subClass = function subClass() {
@@ -28680,7 +28669,7 @@ videojs.addLanguage('en', {
   'Non-Fullscreen': 'Exit Fullscreen'
 });
 
-/*! @name @videojs/http-streaming @version 2.15.1 @license Apache-2.0 */
+/*! @name @videojs/http-streaming @version 2.14.3 @license Apache-2.0 */
 /**
  * @file resolve-url.js - Handling how URLs are resolved and manipulated
  */
@@ -32791,7 +32780,7 @@ var transform = function transform(code) {
 var getWorkerString = function getWorkerString(fn) {
   return fn.toString().replace(/^function.+?{/, '').slice(0, -1);
 };
-/* rollup-plugin-worker-factory start for worker!/Users/gkatsevman/p/http-streaming/src/transmuxer-worker.js */
+/* rollup-plugin-worker-factory start for worker!/Users/abarstow/videojs/http-streaming/src/transmuxer-worker.js */
 
 
 var workerCode$1 = transform(getWorkerString(function () {
@@ -41597,7 +41586,7 @@ var workerCode$1 = transform(getWorkerString(function () {
   };
 }));
 var TransmuxWorker = factory(workerCode$1);
-/* rollup-plugin-worker-factory end for worker!/Users/gkatsevman/p/http-streaming/src/transmuxer-worker.js */
+/* rollup-plugin-worker-factory end for worker!/Users/abarstow/videojs/http-streaming/src/transmuxer-worker.js */
 
 var handleData_ = function handleData_(event, transmuxedData, callback) {
   var _event$data$segment = event.data.segment,
@@ -41894,7 +41883,7 @@ var workerCallback = function workerCallback(options) {
     transmuxer.removeEventListener('message', listenForEndEvent); // transfer ownership of bytes back to us.
 
     if (event.data.data) {
-      event.data.data = new Uint8Array(event.data.data, options.byteOffset || 0, options.byteLength || event.data.data.byteLength);
+      try{event.data.data = new Uint8Array(event.data.data, options.byteOffset || 0, options.byteLength || event.data.data.byteLength);}catch(e){}
 
       if (options.data) {
         options.data = event.data.data;
@@ -46662,7 +46651,6 @@ var SegmentLoader = /*#__PURE__*/function (_videojs$EventTarget) {
     this.bandwidth = 1;
     this.roundTrip = NaN;
     this.trigger('bandwidthupdate');
-    this.trigger('timeout');
   }
   /**
    * Handle the callback from the segmentRequest function and set the
@@ -49390,7 +49378,7 @@ var TimelineChangeController = /*#__PURE__*/function (_videojs$EventTarget) {
 
   return TimelineChangeController;
 }(videojs.EventTarget);
-/* rollup-plugin-worker-factory start for worker!/Users/gkatsevman/p/http-streaming/src/decrypter-worker.js */
+/* rollup-plugin-worker-factory start for worker!/Users/abarstow/videojs/http-streaming/src/decrypter-worker.js */
 
 
 var workerCode = transform(getWorkerString(function () {
@@ -50093,7 +50081,7 @@ var workerCode = transform(getWorkerString(function () {
   };
 }));
 var Decrypter = factory(workerCode);
-/* rollup-plugin-worker-factory end for worker!/Users/gkatsevman/p/http-streaming/src/decrypter-worker.js */
+/* rollup-plugin-worker-factory end for worker!/Users/abarstow/videojs/http-streaming/src/decrypter-worker.js */
 
 /**
  * Convert the properties of an HLS track into an audioTrackKind.
@@ -51320,20 +51308,16 @@ var MasterPlaylistController = /*#__PURE__*/function (_videojs$EventTarget) {
   /**
    * Run selectPlaylist and switch to the new playlist if we should
    *
-   * @param {string} [reason=abr] a reason for why the ABR check is made
    * @private
+   *
    */
   ;
 
-  _proto.checkABR_ = function checkABR_(reason) {
-    if (reason === void 0) {
-      reason = 'abr';
-    }
-
+  _proto.checkABR_ = function checkABR_() {
     var nextPlaylist = this.selectPlaylist();
 
     if (nextPlaylist && this.shouldSwitchToMedia_(nextPlaylist)) {
-      this.switchMedia_(nextPlaylist, reason);
+      this.switchMedia_(nextPlaylist, 'abr');
     }
   };
 
@@ -51585,9 +51569,7 @@ var MasterPlaylistController = /*#__PURE__*/function (_videojs$EventTarget) {
         _this3.requestOptions_.timeout = 0;
       } else {
         _this3.requestOptions_.timeout = requestTimeout;
-      }
-
-      _this3.masterPlaylistLoader_.load(); // TODO: Create a new event on the PlaylistLoader that signals
+      } // TODO: Create a new event on the PlaylistLoader that signals
       // that the segments have changed in some way and use that to
       // update the SegmentLoader instead of doing it twice here and
       // on `loadedplaylist`
@@ -51791,25 +51773,16 @@ var MasterPlaylistController = /*#__PURE__*/function (_videojs$EventTarget) {
   _proto.setupSegmentLoaderListeners_ = function setupSegmentLoaderListeners_() {
     var _this4 = this;
 
-    this.mainSegmentLoader_.on('bandwidthupdate', function () {
-      // Whether or not buffer based ABR or another ABR is used, on a bandwidth change it's
-      // useful to check to see if a rendition switch should be made.
-      _this4.checkABR_('bandwidthupdate');
-
-      _this4.tech_.trigger('bandwidthupdate');
-    });
-    this.mainSegmentLoader_.on('timeout', function () {
-      if (_this4.experimentalBufferBasedABR) {
-        // If a rendition change is needed, then it would've be done on `bandwidthupdate`.
-        // Here the only consideration is that for buffer based ABR there's no guarantee
-        // of an immediate switch (since the bandwidth is averaged with a timeout
-        // bandwidth value of 1), so force a load on the segment loader to keep it going.
-        _this4.mainSegmentLoader_.load();
-      }
-    }); // `progress` events are not reliable enough of a bandwidth measure to trigger buffer
-    // based ABR.
-
     if (!this.experimentalBufferBasedABR) {
+      this.mainSegmentLoader_.on('bandwidthupdate', function () {
+        var nextPlaylist = _this4.selectPlaylist();
+
+        if (_this4.shouldSwitchToMedia_(nextPlaylist)) {
+          _this4.switchMedia_(nextPlaylist, 'bandwidthupdate');
+        }
+
+        _this4.tech_.trigger('bandwidthupdate');
+      });
       this.mainSegmentLoader_.on('progress', function () {
         _this4.trigger('progress');
       });
@@ -53106,7 +53079,6 @@ var Representation = function Representation(vhsHandler, playlist, id) {
     this.width = resolution && resolution.width;
     this.height = resolution && resolution.height;
     this.bandwidth = playlist.attributes.BANDWIDTH;
-    this.frameRate = playlist.attributes['FRAME-RATE'];
   }
 
   this.codecs = codecsForPlaylist(mpc.master(), playlist);
@@ -53945,10 +53917,10 @@ var reloadSourceOnError = function reloadSourceOnError(options) {
   initPlugin(this, options);
 };
 
-var version$4 = "2.15.1";
+var version$4 = "2.14.3";
 var version$3 = "6.0.1";
-var version$2 = "0.22.1";
-var version$1 = "4.8.0";
+var version$2 = "0.21.1";
+var version$1 = "4.7.1";
 var version = "3.1.3";
 var Vhs = {
   PlaylistLoader: PlaylistLoader,

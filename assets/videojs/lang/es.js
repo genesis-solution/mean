@@ -111,10 +111,10 @@ videojs.addLanguage("es",{
   "Watch full video on": "Watch full video on" ,
   "Casting to": "Lanzándolo",
   "Skip Ad in %%TIME%%": "Skip Ad in %%TIME%%",
-  "Skip Ad": "Saltar anuncio",
+  "Skip Ad": "Skip Ad",
+  "Ad": "Anuncio",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%", 
   "Snapshot": "La foto",
   "This Ad will end in": "This Ad will end in",
-  "Ad Playing": "Ad Playing",
-  "Copy video URL": "Copiar URL del video",
-  "Ad %%CURRENT%% of %%TOTAL%%": "Anuncio %%CURRENT%% de %%TOTAL%%"
+  "Ad Playing": "Ad Playing"  
 });

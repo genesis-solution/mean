@@ -1,5 +1,5 @@
 videojs.addLanguage("ca",{
-  "Play": "Reproducció",
+   "Play": "Reproducció",
   "Pause": "Pausa",
   "Current Time": "Temps reproduït",
   "Duration": "Durada total",
@@ -24,6 +24,8 @@ videojs.addLanguage("ca",{
   "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "La reproducció de vídeo s'ha interrumput per un problema de corrupció de dades o bé perquè el vídeo demanava funcions que el vostre navegador no ofereix.",
   "No compatible source was found for this media.": "No s'ha trobat cap font compatible amb el vídeo.",
   
+  "Picture in Picture": "Picture in Picture",
+  "Exit Picture in Picture": "Exit Picture in Picture",
   "Quality": "Quality",
   "Settings": "Settings",
   "Related": "Related",
@@ -52,6 +54,8 @@ videojs.addLanguage("ca",{
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip Ad in %%TIME%%",
   "Skip Ad": "Skip Ad",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%", 
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"  

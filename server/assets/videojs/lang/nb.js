@@ -112,6 +112,8 @@ videojs.addLanguage("nb",{
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip in %%TIME%%",
   "Skip Ad": "Átlépheti a reklámot",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing" 

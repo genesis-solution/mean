@@ -1,5 +1,5 @@
 videojs.addLanguage("bg",{
-  "Play": "Възпроизвеждане",
+   "Play": "Възпроизвеждане",
   "Pause": "Пауза",
   "Current Time": "Текущо време",
   "Duration": "Продължителност",
@@ -22,7 +22,7 @@ videojs.addLanguage("bg",{
   "A network error caused the media download to fail part-way.": "Грешка в мрежата провали изтеглянето на видеото.",
   "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Видеото не може да бъде заредено заради проблем със сървъра или мрежата или защото този формат не е поддържан.",
   "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Възпроизвеждането на видеото беше прекъснато заради проблем с файла или защото видеото използва опции които браузърът Ви не поддържа.",
-  "No compatible source was found for this media.": "Не беше намерен съвместим източник за това видео.",
+  "No compatible source was found for this media.": "Не беше намерен съвместим източник за това видео."
  
   "Quality": "Quality",
   "Settings": "Settings",
@@ -55,4 +55,6 @@ videojs.addLanguage("bg",{
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"  
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",
+  "Snapshot": "Snapshot", 
 });

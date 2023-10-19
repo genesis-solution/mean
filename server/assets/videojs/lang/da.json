@@ -23,6 +23,7 @@
   "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Videoen kunne ikke indlæses, enten fordi serveren eller netværket fejlede, eller fordi formatet ikke er understøttet.",
   "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Videoafspilningen blev afbrudt på grund af ødelagte data eller fordi videoen benyttede faciliteter som din browser ikke understøtter.",
   "No compatible source was found for this media.": "Fandt ikke en kompatibel kilde for denne media.",
+  
   "Quality": "Quality",
   "Settings": "Settings",
   "Related": "Related",
@@ -51,6 +52,8 @@
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip Ad in %%TIME%%",
   "Skip Ad": "Skip Ad",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"  

@@ -106,6 +106,8 @@ videojs.addLanguage("sl",{
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip Ad in %%TIME%%",
   "Skip Ad": "Skip Ad",
+  "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%",  
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing" 

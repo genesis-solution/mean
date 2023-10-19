@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 7.21.1 <http://videojs.com/>
+ * Video.js 7.20.3 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/main/LICENSE>
@@ -16,7 +16,7 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.videojs = factory());
 }(this, (function () { 'use strict';
 
-  var version$5 = "7.21.1";
+  var version$5 = "7.20.3";
 
   /**
    * An Object that contains lifecycle hooks as keys which point to an array
@@ -567,7 +567,7 @@
    * @return {Object}
    */
 
-  function assign$1(target) {
+  function assign(target) {
     for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       sources[_key - 1] = arguments[_key];
     }
@@ -1561,7 +1561,7 @@
    *         Will be `true` if the value is a text node, `false` otherwise.
    */
 
-  function isTextNode$1(value) {
+  function isTextNode(value) {
     return isObject$1(value) && value.nodeType === 3;
   }
   /**
@@ -1630,7 +1630,7 @@
         value = value();
       }
 
-      if (isEl(value) || isTextNode$1(value)) {
+      if (isEl(value) || isTextNode(value)) {
         return value;
       }
 
@@ -1788,7 +1788,7 @@
     getBoundingClientRect: getBoundingClientRect,
     findPosition: findPosition,
     getPointerPosition: getPointerPosition,
-    isTextNode: isTextNode$1,
+    isTextNode: isTextNode,
     emptyEl: emptyEl,
     normalizeContent: normalizeContent,
     appendContent: appendContent,
@@ -2893,8 +2893,7 @@
     map["delete"](type);
     window.clearTimeout(oldTimeout);
     var timeout = window.setTimeout(function () {
-      map["delete"](type); // if we cleared out all timeouts for the current target, delete its map
-
+      // if we cleared out all timeouts for the current target, delete its map
       if (map.size === 0) {
         map = null;
         EVENT_MAP["delete"](_this);
@@ -3439,7 +3438,7 @@
       });
     }
 
-    assign$1(target, EventedMixin);
+    assign(target, EventedMixin);
 
     if (target.eventedCallbacks) {
       target.eventedCallbacks.forEach(function (callback) {
@@ -3561,10 +3560,10 @@
    */
 
   function stateful(target, defaultState) {
-    assign$1(target, StatefulMixin); // This happens after the mixing-in because we need to replace the `state`
+    assign(target, StatefulMixin); // This happens after the mixing-in because we need to replace the `state`
     // added in that step.
 
-    target.state = assign$1({}, target.state, defaultState); // Auto-bind the `handleStateChanged` method of the target object if it exists.
+    target.state = assign({}, target.state, defaultState); // Auto-bind the `handleStateChanged` method of the target object if it exists.
 
     if (typeof target.handleStateChanged === 'function' && isEvented(target)) {
       target.on('statechanged', target.handleStateChanged);
@@ -5975,7 +5974,7 @@
         this.code = value.code;
       }
 
-      assign$1(this, value);
+      assign(this, value);
     }
 
     if (!this.message) {
@@ -12773,7 +12772,7 @@
         return setSourceHelper(src, mwrest, next, player, acc, lastRun);
       }
 
-      mw.setSource(assign$1({}, src), function (err, _src) {
+      mw.setSource(assign({}, src), function (err, _src) {
         // something happened, try the next middleware on the current level
         // make sure to use the old src
         if (err) {
@@ -13117,7 +13116,7 @@
         attributes = {};
       }
 
-      props = assign$1({
+      props = assign({
         className: this.buildCSSClass(),
         tabIndex: 0
       }, props);
@@ -13127,7 +13126,7 @@
       } // Add ARIA attributes for clickable element which is not a native HTML button
 
 
-      attributes = assign$1({
+      attributes = assign({
         role: 'button'
       }, attributes);
       this.tabIndex_ = props.tabIndex;
@@ -13965,11 +13964,11 @@
       }
 
       tag = 'button';
-      props = assign$1({
+      props = assign({
         className: this.buildCSSClass()
       }, props); // Add attributes for button element
 
-      attributes = assign$1({
+      attributes = assign({
         // Necessary since the default button type is "submit"
         type: 'button'
       }, attributes);
@@ -15392,10 +15391,10 @@
 
       // Add the slider element class to all sub classes
       props.className = props.className + ' vjs-slider';
-      props = assign$1({
+      props = assign({
         tabIndex: 0
       }, props);
-      attributes = assign$1({
+      attributes = assign({
         'role': 'slider',
         'aria-valuenow': 0,
         'aria-valuemin': 0,
@@ -19089,7 +19088,7 @@
       // The control is textual, not just an icon
       this.nonIconControl = true;
 
-      var el = _ClickableComponent.prototype.createEl.call(this, 'li', assign$1({
+      var el = _ClickableComponent.prototype.createEl.call(this, 'li', assign({
         className: 'vjs-menu-item',
         tabIndex: -1
       }, props), attrs); // swap icon with menu item text.
@@ -22840,7 +22839,7 @@
             delete attributes.controls;
           }
 
-          setAttributes(el, assign$1(attributes, {
+          setAttributes(el, assign(attributes, {
             id: this.options_.techId,
             "class": 'vjs-tech'
           }));
@@ -24809,7 +24808,7 @@
       // This latter part coincides with the load order
       // (tag must exist before Player)
 
-      options = assign$1(Player.getTagSettings(tag), options); // Delay the initialization of children because we need to set up
+      options = assign(Player.getTagSettings(tag), options); // Delay the initialization of children because we need to set up
       // player properties first, and can't use `this` before `super()`
 
       options.initChildren = false; // Same with creating the element
@@ -25691,9 +25690,9 @@
         var props = ALL[name];
         techOptions[props.getterName] = _this4[props.privateName];
       });
-      assign$1(techOptions, this.options_[titleTechName]);
-      assign$1(techOptions, this.options_[camelTechName]);
-      assign$1(techOptions, this.options_[techName.toLowerCase()]);
+      assign(techOptions, this.options_[titleTechName]);
+      assign(techOptions, this.options_[camelTechName]);
+      assign(techOptions, this.options_[techName.toLowerCase()]);
 
       if (this.tag) {
         techOptions.tag = this.tag;
@@ -29449,16 +29448,16 @@
     _proto.breakpoints = function breakpoints(_breakpoints) {
       // Used as a getter.
       if (_breakpoints === undefined) {
-        return assign$1(this.breakpoints_);
+        return assign(this.breakpoints_);
       }
 
       this.breakpoint_ = '';
-      this.breakpoints_ = assign$1({}, DEFAULT_BREAKPOINTS, _breakpoints); // When breakpoint definitions change, we need to update the currently
+      this.breakpoints_ = assign({}, DEFAULT_BREAKPOINTS, _breakpoints); // When breakpoint definitions change, we need to update the currently
       // selected breakpoint.
 
       this.updateCurrentBreakpoint_(); // Clone the breakpoints before returning.
 
-      return assign$1(this.breakpoints_);
+      return assign(this.breakpoints_);
     }
     /**
      * Get or set a flag indicating whether or not this player should adjust
@@ -29701,10 +29700,10 @@
           log$1.error(err);
         }
 
-        assign$1(tagOptions, data);
+        assign(tagOptions, data);
       }
 
-      assign$1(baseOptions, tagOptions); // Get tag children settings
+      assign(baseOptions, tagOptions); // Get tag children settings
 
       if (tag.hasChildNodes()) {
         var children = tag.childNodes;
@@ -30698,13 +30697,11 @@
    * @file extend.js
    * @module extend
    */
-  var hasLogged = false;
   /**
    * Used to subclass an existing class by emulating ES subclassing using the
    * `extends` keyword.
    *
    * @function
-   * @deprecated
    * @example
    * var MyComponent = videojs.extend(videojs.getComponent('Component'), {
    *   myCustomMethod: function() {
@@ -30725,14 +30722,6 @@
   var extend = function extend(superClass, subClassMethods) {
     if (subClassMethods === void 0) {
       subClassMethods = {};
-    }
-
-    // Log a warning the first time extend is called to note that it is deprecated
-    // It was previously deprecated in our documentation (guides, specifically),
-    // but was never formally deprecated in code.
-    if (!hasLogged) {
-      log$1.warn('videojs.extend is deprecated as of Video.js 7.22.0 and will be removed in Video.js 8.0.0');
-      hasLogged = true;
     }
 
     var subClass = function subClass() {
@@ -31389,9 +31378,9 @@
     })();
   });
 
-  var DEFAULT_LOCATION = 'http://example.com';
+  var DEFAULT_LOCATION$1 = 'http://example.com';
 
-  var resolveUrl$1 = function resolveUrl(baseUrl, relativeUrl) {
+  var resolveUrl$2 = function resolveUrl(baseUrl, relativeUrl) {
     // return early if we don't need to resolve
     if (/^[a-z]+:/i.test(relativeUrl)) {
       return relativeUrl;
@@ -31411,7 +31400,7 @@
     var removeLocation = !window.location && !/\/\//i.test(baseUrl); // if the base URL is relative then combine with the current location
 
     if (nativeURL) {
-      baseUrl = new window.URL(baseUrl, window.location || DEFAULT_LOCATION);
+      baseUrl = new window.URL(baseUrl, window.location || DEFAULT_LOCATION$1);
     } else if (!/\/\//i.test(baseUrl)) {
       baseUrl = urlToolkit.buildAbsoluteURL(window.location && window.location.href || '', baseUrl);
     }
@@ -31422,7 +31411,7 @@
       // otherwise, return the url unmodified
 
       if (removeLocation) {
-        return newUrl.href.slice(DEFAULT_LOCATION.length);
+        return newUrl.href.slice(DEFAULT_LOCATION$1.length);
       } else if (protocolLess) {
         return newUrl.href.slice(newUrl.protocol.length);
       }
@@ -31568,7 +31557,7 @@
     return array;
   }
 
-  /*! @name m3u8-parser @version 4.8.0 @license Apache-2.0 */
+  /*! @name m3u8-parser @version 4.7.1 @license Apache-2.0 */
   /**
    * A stream that buffers string input and generates a `data` event for each
    * line.
@@ -31973,10 +31962,6 @@
 
             if (event.attributes.BANDWIDTH) {
               event.attributes.BANDWIDTH = parseInt(event.attributes.BANDWIDTH, 10);
-            }
-
-            if (event.attributes['FRAME-RATE']) {
-              event.attributes['FRAME-RATE'] = parseFloat(event.attributes['FRAME-RATE']);
             }
 
             if (event.attributes['PROGRAM-ID']) {
@@ -33543,6 +33528,50 @@
     });
   };
 
+  var DEFAULT_LOCATION = 'http://example.com';
+
+  var resolveUrl$1 = function resolveUrl(baseUrl, relativeUrl) {
+    // return early if we don't need to resolve
+    if (/^[a-z]+:/i.test(relativeUrl)) {
+      return relativeUrl;
+    } // if baseUrl is a data URI, ignore it and resolve everything relative to window.location
+
+
+    if (/^data:/.test(baseUrl)) {
+      baseUrl = window.location && window.location.href || '';
+    } // IE11 supports URL but not the URL constructor
+    // feature detect the behavior we want
+
+
+    var nativeURL = typeof window.URL === 'function';
+    var protocolLess = /^\/\//.test(baseUrl); // remove location if window.location isn't available (i.e. we're in node)
+    // and if baseUrl isn't an absolute url
+
+    var removeLocation = !window.location && !/\/\//i.test(baseUrl); // if the base URL is relative then combine with the current location
+
+    if (nativeURL) {
+      baseUrl = new window.URL(baseUrl, window.location || DEFAULT_LOCATION);
+    } else if (!/\/\//i.test(baseUrl)) {
+      baseUrl = urlToolkit.buildAbsoluteURL(window.location && window.location.href || '', baseUrl);
+    }
+
+    if (nativeURL) {
+      var newUrl = new URL(relativeUrl, baseUrl); // if we're a protocol-less url, remove the protocol
+      // and if we're location-less, remove the location
+      // otherwise, return the url unmodified
+
+      if (removeLocation) {
+        return newUrl.href.slice(DEFAULT_LOCATION.length);
+      } else if (protocolLess) {
+        return newUrl.href.slice(newUrl.protocol.length);
+      }
+
+      return newUrl.href;
+    }
+
+    return urlToolkit.buildAbsoluteURL(baseUrl, relativeUrl);
+  };
+
   /**
    * Loops through all supported media groups in master and calls the provided
    * callback for each group
@@ -33581,41 +33610,6 @@
   }
 
   /**
-   * Ponyfill for `Array.prototype.find` which is only available in ES6 runtimes.
-   *
-   * Works with anything that has a `length` property and index access properties, including NodeList.
-   *
-   * @template {unknown} T
-   * @param {Array<T> | ({length:number, [number]: T})} list
-   * @param {function (item: T, index: number, list:Array<T> | ({length:number, [number]: T})):boolean} predicate
-   * @param {Partial<Pick<ArrayConstructor['prototype'], 'find'>>?} ac `Array.prototype` by default,
-   * 				allows injecting a custom implementation in tests
-   * @returns {T | undefined}
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-   * @see https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.find
-   */
-
-  function find$1(list, predicate, ac) {
-    if (ac === undefined) {
-      ac = Array.prototype;
-    }
-
-    if (list && typeof ac.find === 'function') {
-      return ac.find.call(list, predicate);
-    }
-
-    for (var i = 0; i < list.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(list, i)) {
-        var item = list[i];
-
-        if (predicate.call(undefined, item, i, list)) {
-          return item;
-        }
-      }
-    }
-  }
-  /**
    * "Shallow freezes" an object to render it immutable.
    * Uses `Object.freeze` if available,
    * otherwise the immutability is only in the type.
@@ -33631,41 +33625,12 @@
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
    */
 
-
   function freeze(object, oc) {
     if (oc === undefined) {
       oc = Object;
     }
 
     return oc && typeof oc.freeze === 'function' ? oc.freeze(object) : object;
-  }
-  /**
-   * Since we can not rely on `Object.assign` we provide a simplified version
-   * that is sufficient for our needs.
-   *
-   * @param {Object} target
-   * @param {Object | null | undefined} source
-   *
-   * @returns {Object} target
-   * @throws TypeError if target is not an object
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-   * @see https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.assign
-   */
-
-
-  function assign(target, source) {
-    if (target === null || typeof target !== 'object') {
-      throw new TypeError('target is not an object');
-    }
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-
-    return target;
   }
   /**
    * All mime types that are allowed as input to `DOMParser.parseFromString`
@@ -33785,20 +33750,15 @@
      */
     XMLNS: 'http://www.w3.org/2000/xmlns/'
   });
-  var assign_1 = assign;
-  var find_1 = find$1;
   var freeze_1 = freeze;
   var MIME_TYPE_1 = MIME_TYPE;
   var NAMESPACE_1 = NAMESPACE$3;
   var conventions = {
-    assign: assign_1,
-    find: find_1,
     freeze: freeze_1,
     MIME_TYPE: MIME_TYPE_1,
     NAMESPACE: NAMESPACE_1
   };
 
-  var find = conventions.find;
   var NAMESPACE$2 = conventions.NAMESPACE;
   /**
    * A prerequisite for `[].filter`, to drop elements that are empty
@@ -33867,9 +33827,7 @@
 
   function copy(src, dest) {
     for (var p in src) {
-      if (Object.prototype.hasOwnProperty.call(src, p)) {
-        dest[p] = src[p];
-      }
+      dest[p] = src[p];
     }
   }
   /**
@@ -33971,10 +33929,10 @@
     /**
      * Returns the indexth item in the collection. If index is greater than or equal to the number of nodes in the list, this returns null.
      * @standard level1
-     * @param index  unsigned long
+     * @param index  unsigned long 
      *   Index into the collection.
      * @return Node
-     * 	The node at the indexth position in the NodeList, or null if that is not a valid index.
+     * 	The node at the indexth position in the NodeList, or null if that is not a valid index. 
      */
     item: function item(index) {
       return this[index] || null;
@@ -33985,24 +33943,6 @@
       }
 
       return buf.join('');
-    },
-
-    /**
-     * @private
-     * @param {function (Node):boolean} predicate
-     * @returns {Node[]}
-     */
-    filter: function filter(predicate) {
-      return Array.prototype.filter.call(this, predicate);
-    },
-
-    /**
-     * @private
-     * @param {Node} item
-     * @returns {number}
-     */
-    indexOf: function indexOf(item) {
-      return Array.prototype.indexOf.call(this, item);
     }
   };
 
@@ -34043,7 +33983,7 @@
    * but this is simply to allow convenient enumeration of the contents of a NamedNodeMap,
    * and does not imply that the DOM specifies an order to these Nodes.
    * NamedNodeMap objects in the DOM are live.
-   * used for attributes or DocumentType entities
+   * used for attributes or DocumentType entities 
    */
 
 
@@ -34101,7 +34041,7 @@
         }
       }
     } else {
-      throw new DOMException(NOT_FOUND_ERR, new Error(el.tagName + '@' + attr));
+      throw DOMException(NOT_FOUND_ERR, new Error(el.tagName + '@' + attr));
     }
   }
 
@@ -34313,12 +34253,12 @@
     localName: null,
     // Modified in DOM Level 2:
     insertBefore: function insertBefore(newChild, refChild) {
-      //raises
+      //raises 
       return _insertBefore(this, newChild, refChild);
     },
     replaceChild: function replaceChild(newChild, oldChild) {
-      //raises
-      _insertBefore(this, newChild, oldChild, assertPreReplacementValidityInDocument);
+      //raises 
+      this.insertBefore(newChild, oldChild);
 
       if (oldChild) {
         this.removeChild(oldChild);
@@ -34383,7 +34323,7 @@
 
         if (map) {
           for (var n in map) {
-            if (Object.prototype.hasOwnProperty.call(map, n) && map[n] === namespaceURI) {
+            if (map[n] == namespaceURI) {
               return n;
             }
           }
@@ -34402,7 +34342,7 @@
         var map = el._nsMap; //console.dir(map)
 
         if (map) {
-          if (Object.prototype.hasOwnProperty.call(map, prefix)) {
+          if (prefix in map) {
             return map[prefix];
           }
         }
@@ -34444,9 +34384,7 @@
     }
   }
 
-  function Document() {
-    this.ownerDocument = this;
-  }
+  function Document() {}
 
   function _onAddAttribute(doc, el, newAttr) {
     doc && doc._inc++;
@@ -34467,19 +34405,6 @@
       delete el._nsMap[newAttr.prefix ? newAttr.localName : ''];
     }
   }
-  /**
-   * Updates `el.childNodes`, updating the indexed items and it's `length`.
-   * Passing `newChild` means it will be appended.
-   * Otherwise it's assumed that an item has been removed,
-   * and `el.firstNode` and it's `.nextSibling` are used
-   * to walk the current list of child nodes.
-   *
-   * @param {Document} doc
-   * @param {Node} el
-   * @param {Node} [newChild]
-   * @private
-   */
-
 
   function _onUpdateChild(doc, el, newChild) {
     if (doc && doc._inc) {
@@ -34490,6 +34415,7 @@
       if (newChild) {
         cs[cs.length++] = newChild;
       } else {
+        //console.log(1)
         var child = el.firstChild;
         var i = 0;
 
@@ -34499,21 +34425,16 @@
         }
 
         cs.length = i;
-        delete cs[cs.length];
       }
     }
   }
   /**
-   * Removes the connections between `parentNode` and `child`
-   * and any existing `child.previousSibling` or `child.nextSibling`.
-   *
-   * @see https://github.com/xmldom/xmldom/issues/135
-   * @see https://github.com/xmldom/xmldom/issues/145
-   *
-   * @param {Node} parentNode
-   * @param {Node} child
-   * @returns {Node} the child that was removed.
-   * @private
+   * attributes;
+   * children;
+   * 
+   * writeable properties:
+   * nodeValue,Attr:value,CharacterData:data
+   * prefix
    */
 
 
@@ -34533,360 +34454,81 @@
       parentNode.lastChild = previous;
     }
 
-    child.parentNode = null;
-    child.previousSibling = null;
-    child.nextSibling = null;
-
     _onUpdateChild(parentNode.ownerDocument, parentNode);
 
     return child;
   }
   /**
-   * Returns `true` if `node` can be a parent for insertion.
-   * @param {Node} node
-   * @returns {boolean}
+   * preformance key(refChild == null)
    */
 
 
-  function hasValidParentNodeType(node) {
-    return node && (node.nodeType === Node.DOCUMENT_NODE || node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.ELEMENT_NODE);
-  }
-  /**
-   * Returns `true` if `node` can be inserted according to it's `nodeType`.
-   * @param {Node} node
-   * @returns {boolean}
-   */
-
-
-  function hasInsertableNodeType(node) {
-    return node && (isElementNode(node) || isTextNode(node) || isDocTypeNode(node) || node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.COMMENT_NODE || node.nodeType === Node.PROCESSING_INSTRUCTION_NODE);
-  }
-  /**
-   * Returns true if `node` is a DOCTYPE node
-   * @param {Node} node
-   * @returns {boolean}
-   */
-
-
-  function isDocTypeNode(node) {
-    return node && node.nodeType === Node.DOCUMENT_TYPE_NODE;
-  }
-  /**
-   * Returns true if the node is an element
-   * @param {Node} node
-   * @returns {boolean}
-   */
-
-
-  function isElementNode(node) {
-    return node && node.nodeType === Node.ELEMENT_NODE;
-  }
-  /**
-   * Returns true if `node` is a text node
-   * @param {Node} node
-   * @returns {boolean}
-   */
-
-
-  function isTextNode(node) {
-    return node && node.nodeType === Node.TEXT_NODE;
-  }
-  /**
-   * Check if en element node can be inserted before `child`, or at the end if child is falsy,
-   * according to the presence and position of a doctype node on the same level.
-   *
-   * @param {Document} doc The document node
-   * @param {Node} child the node that would become the nextSibling if the element would be inserted
-   * @returns {boolean} `true` if an element can be inserted before child
-   * @private
-   * https://dom.spec.whatwg.org/#concept-node-ensure-pre-insertion-validity
-   */
-
-
-  function isElementInsertionPossible(doc, child) {
-    var parentChildNodes = doc.childNodes || [];
-
-    if (find(parentChildNodes, isElementNode) || isDocTypeNode(child)) {
-      return false;
-    }
-
-    var docTypeNode = find(parentChildNodes, isDocTypeNode);
-    return !(child && docTypeNode && parentChildNodes.indexOf(docTypeNode) > parentChildNodes.indexOf(child));
-  }
-  /**
-   * Check if en element node can be inserted before `child`, or at the end if child is falsy,
-   * according to the presence and position of a doctype node on the same level.
-   *
-   * @param {Node} doc The document node
-   * @param {Node} child the node that would become the nextSibling if the element would be inserted
-   * @returns {boolean} `true` if an element can be inserted before child
-   * @private
-   * https://dom.spec.whatwg.org/#concept-node-ensure-pre-insertion-validity
-   */
-
-
-  function isElementReplacementPossible(doc, child) {
-    var parentChildNodes = doc.childNodes || [];
-
-    function hasElementChildThatIsNotChild(node) {
-      return isElementNode(node) && node !== child;
-    }
-
-    if (find(parentChildNodes, hasElementChildThatIsNotChild)) {
-      return false;
-    }
-
-    var docTypeNode = find(parentChildNodes, isDocTypeNode);
-    return !(child && docTypeNode && parentChildNodes.indexOf(docTypeNode) > parentChildNodes.indexOf(child));
-  }
-  /**
-   * @private
-   * Steps 1-5 of the checks before inserting and before replacing a child are the same.
-   *
-   * @param {Node} parent the parent node to insert `node` into
-   * @param {Node} node the node to insert
-   * @param {Node=} child the node that should become the `nextSibling` of `node`
-   * @returns {Node}
-   * @throws DOMException for several node combinations that would create a DOM that is not well-formed.
-   * @throws DOMException if `child` is provided but is not a child of `parent`.
-   * @see https://dom.spec.whatwg.org/#concept-node-ensure-pre-insertion-validity
-   * @see https://dom.spec.whatwg.org/#concept-node-replace
-   */
-
-
-  function assertPreInsertionValidity1to5(parent, node, child) {
-    // 1. If `parent` is not a Document, DocumentFragment, or Element node, then throw a "HierarchyRequestError" DOMException.
-    if (!hasValidParentNodeType(parent)) {
-      throw new DOMException(HIERARCHY_REQUEST_ERR, 'Unexpected parent node type ' + parent.nodeType);
-    } // 2. If `node` is a host-including inclusive ancestor of `parent`, then throw a "HierarchyRequestError" DOMException.
-    // not implemented!
-    // 3. If `child` is non-null and its parent is not `parent`, then throw a "NotFoundError" DOMException.
-
-
-    if (child && child.parentNode !== parent) {
-      throw new DOMException(NOT_FOUND_ERR, 'child not in parent');
-    }
-
-    if ( // 4. If `node` is not a DocumentFragment, DocumentType, Element, or CharacterData node, then throw a "HierarchyRequestError" DOMException.
-    !hasInsertableNodeType(node) || // 5. If either `node` is a Text node and `parent` is a document,
-    // the sax parser currently adds top level text nodes, this will be fixed in 0.9.0
-    // || (node.nodeType === Node.TEXT_NODE && parent.nodeType === Node.DOCUMENT_NODE)
-    // or `node` is a doctype and `parent` is not a document, then throw a "HierarchyRequestError" DOMException.
-    isDocTypeNode(node) && parent.nodeType !== Node.DOCUMENT_NODE) {
-      throw new DOMException(HIERARCHY_REQUEST_ERR, 'Unexpected node type ' + node.nodeType + ' for parent node type ' + parent.nodeType);
-    }
-  }
-  /**
-   * @private
-   * Step 6 of the checks before inserting and before replacing a child are different.
-   *
-   * @param {Document} parent the parent node to insert `node` into
-   * @param {Node} node the node to insert
-   * @param {Node | undefined} child the node that should become the `nextSibling` of `node`
-   * @returns {Node}
-   * @throws DOMException for several node combinations that would create a DOM that is not well-formed.
-   * @throws DOMException if `child` is provided but is not a child of `parent`.
-   * @see https://dom.spec.whatwg.org/#concept-node-ensure-pre-insertion-validity
-   * @see https://dom.spec.whatwg.org/#concept-node-replace
-   */
-
-
-  function assertPreInsertionValidityInDocument(parent, node, child) {
-    var parentChildNodes = parent.childNodes || [];
-    var nodeChildNodes = node.childNodes || []; // DocumentFragment
-
-    if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-      var nodeChildElements = nodeChildNodes.filter(isElementNode); // If node has more than one element child or has a Text node child.
-
-      if (nodeChildElements.length > 1 || find(nodeChildNodes, isTextNode)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'More than one element or text in fragment');
-      } // Otherwise, if `node` has one element child and either `parent` has an element child,
-      // `child` is a doctype, or `child` is non-null and a doctype is following `child`.
-
-
-      if (nodeChildElements.length === 1 && !isElementInsertionPossible(parent, child)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Element in fragment can not be inserted before doctype');
-      }
-    } // Element
-
-
-    if (isElementNode(node)) {
-      // `parent` has an element child, `child` is a doctype,
-      // or `child` is non-null and a doctype is following `child`.
-      if (!isElementInsertionPossible(parent, child)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Only one element can be added and only after doctype');
-      }
-    } // DocumentType
-
-
-    if (isDocTypeNode(node)) {
-      // `parent` has a doctype child,
-      if (find(parentChildNodes, isDocTypeNode)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Only one doctype is allowed');
-      }
-
-      var parentElementChild = find(parentChildNodes, isElementNode); // `child` is non-null and an element is preceding `child`,
-
-      if (child && parentChildNodes.indexOf(parentElementChild) < parentChildNodes.indexOf(child)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Doctype can only be inserted before an element');
-      } // or `child` is null and `parent` has an element child.
-
-
-      if (!child && parentElementChild) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Doctype can not be appended since element is present');
-      }
-    }
-  }
-  /**
-   * @private
-   * Step 6 of the checks before inserting and before replacing a child are different.
-   *
-   * @param {Document} parent the parent node to insert `node` into
-   * @param {Node} node the node to insert
-   * @param {Node | undefined} child the node that should become the `nextSibling` of `node`
-   * @returns {Node}
-   * @throws DOMException for several node combinations that would create a DOM that is not well-formed.
-   * @throws DOMException if `child` is provided but is not a child of `parent`.
-   * @see https://dom.spec.whatwg.org/#concept-node-ensure-pre-insertion-validity
-   * @see https://dom.spec.whatwg.org/#concept-node-replace
-   */
-
-
-  function assertPreReplacementValidityInDocument(parent, node, child) {
-    var parentChildNodes = parent.childNodes || [];
-    var nodeChildNodes = node.childNodes || []; // DocumentFragment
-
-    if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-      var nodeChildElements = nodeChildNodes.filter(isElementNode); // If `node` has more than one element child or has a Text node child.
-
-      if (nodeChildElements.length > 1 || find(nodeChildNodes, isTextNode)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'More than one element or text in fragment');
-      } // Otherwise, if `node` has one element child and either `parent` has an element child that is not `child` or a doctype is following `child`.
-
-
-      if (nodeChildElements.length === 1 && !isElementReplacementPossible(parent, child)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Element in fragment can not be inserted before doctype');
-      }
-    } // Element
-
-
-    if (isElementNode(node)) {
-      // `parent` has an element child that is not `child` or a doctype is following `child`.
-      if (!isElementReplacementPossible(parent, child)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Only one element can be added and only after doctype');
-      }
-    } // DocumentType
-
-
-    if (isDocTypeNode(node)) {
-      var hasDoctypeChildThatIsNotChild = function hasDoctypeChildThatIsNotChild(node) {
-        return isDocTypeNode(node) && node !== child;
-      }; // `parent` has a doctype child that is not `child`,
-
-
-      if (find(parentChildNodes, hasDoctypeChildThatIsNotChild)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Only one doctype is allowed');
-      }
-
-      var parentElementChild = find(parentChildNodes, isElementNode); // or an element is preceding `child`.
-
-      if (child && parentChildNodes.indexOf(parentElementChild) < parentChildNodes.indexOf(child)) {
-        throw new DOMException(HIERARCHY_REQUEST_ERR, 'Doctype can only be inserted before an element');
-      }
-    }
-  }
-  /**
-   * @private
-   * @param {Node} parent the parent node to insert `node` into
-   * @param {Node} node the node to insert
-   * @param {Node=} child the node that should become the `nextSibling` of `node`
-   * @returns {Node}
-   * @throws DOMException for several node combinations that would create a DOM that is not well-formed.
-   * @throws DOMException if `child` is provided but is not a child of `parent`.
-   * @see https://dom.spec.whatwg.org/#concept-node-ensure-pre-insertion-validity
-   */
-
-
-  function _insertBefore(parent, node, child, _inDocumentAssertion) {
-    // To ensure pre-insertion validity of a node into a parent before a child, run these steps:
-    assertPreInsertionValidity1to5(parent, node, child); // If parent is a document, and any of the statements below, switched on the interface node implements,
-    // are true, then throw a "HierarchyRequestError" DOMException.
-
-    if (parent.nodeType === Node.DOCUMENT_NODE) {
-      (_inDocumentAssertion || assertPreInsertionValidityInDocument)(parent, node, child);
-    }
-
-    var cp = node.parentNode;
+  function _insertBefore(parentNode, newChild, nextChild) {
+    var cp = newChild.parentNode;
 
     if (cp) {
-      cp.removeChild(node); //remove and update
+      cp.removeChild(newChild); //remove and update
     }
 
-    if (node.nodeType === DOCUMENT_FRAGMENT_NODE) {
-      var newFirst = node.firstChild;
+    if (newChild.nodeType === DOCUMENT_FRAGMENT_NODE) {
+      var newFirst = newChild.firstChild;
 
       if (newFirst == null) {
-        return node;
+        return newChild;
       }
 
-      var newLast = node.lastChild;
+      var newLast = newChild.lastChild;
     } else {
-      newFirst = newLast = node;
+      newFirst = newLast = newChild;
     }
 
-    var pre = child ? child.previousSibling : parent.lastChild;
+    var pre = nextChild ? nextChild.previousSibling : parentNode.lastChild;
     newFirst.previousSibling = pre;
-    newLast.nextSibling = child;
+    newLast.nextSibling = nextChild;
 
     if (pre) {
       pre.nextSibling = newFirst;
     } else {
-      parent.firstChild = newFirst;
+      parentNode.firstChild = newFirst;
     }
 
-    if (child == null) {
-      parent.lastChild = newLast;
+    if (nextChild == null) {
+      parentNode.lastChild = newLast;
     } else {
-      child.previousSibling = newLast;
+      nextChild.previousSibling = newLast;
     }
 
     do {
-      newFirst.parentNode = parent;
+      newFirst.parentNode = parentNode;
     } while (newFirst !== newLast && (newFirst = newFirst.nextSibling));
 
-    _onUpdateChild(parent.ownerDocument || parent, parent); //console.log(parent.lastChild.nextSibling == null)
+    _onUpdateChild(parentNode.ownerDocument || parentNode, parentNode); //console.log(parentNode.lastChild.nextSibling == null)
 
 
-    if (node.nodeType == DOCUMENT_FRAGMENT_NODE) {
-      node.firstChild = node.lastChild = null;
+    if (newChild.nodeType == DOCUMENT_FRAGMENT_NODE) {
+      newChild.firstChild = newChild.lastChild = null;
     }
 
-    return node;
+    return newChild;
   }
-  /**
-   * Appends `newChild` to `parentNode`.
-   * If `newChild` is already connected to a `parentNode` it is first removed from it.
-   *
-   * @see https://github.com/xmldom/xmldom/issues/135
-   * @see https://github.com/xmldom/xmldom/issues/145
-   * @param {Node} parentNode
-   * @param {Node} newChild
-   * @returns {Node}
-   * @private
-   */
-
 
   function _appendSingleChild(parentNode, newChild) {
-    if (newChild.parentNode) {
-      newChild.parentNode.removeChild(newChild);
+    var cp = newChild.parentNode;
+
+    if (cp) {
+      var pre = parentNode.lastChild;
+      cp.removeChild(newChild); //remove and update
+
+      var pre = parentNode.lastChild;
     }
 
+    var pre = parentNode.lastChild;
     newChild.parentNode = parentNode;
-    newChild.previousSibling = parentNode.lastChild;
+    newChild.previousSibling = pre;
     newChild.nextSibling = null;
 
-    if (newChild.previousSibling) {
-      newChild.previousSibling.nextSibling = newChild;
+    if (pre) {
+      pre.nextSibling = newChild;
     } else {
       parentNode.firstChild = newChild;
     }
@@ -34895,7 +34537,7 @@
 
     _onUpdateChild(parentNode.ownerDocument, parentNode, newChild);
 
-    return newChild;
+    return newChild; //console.log("__aa",parentNode.lastChild.nextSibling == null)
   }
 
   Document.prototype = {
@@ -34926,15 +34568,11 @@
         return newChild;
       }
 
-      _insertBefore(this, newChild, refChild);
-
-      newChild.ownerDocument = this;
-
-      if (this.documentElement === null && newChild.nodeType === ELEMENT_NODE) {
+      if (this.documentElement == null && newChild.nodeType == ELEMENT_NODE) {
         this.documentElement = newChild;
       }
 
-      return newChild;
+      return _insertBefore(this, newChild, refChild), newChild.ownerDocument = this, newChild;
     },
     removeChild: function removeChild(oldChild) {
       if (this.documentElement == oldChild) {
@@ -34942,20 +34580,6 @@
       }
 
       return _removeChild(this, oldChild);
-    },
-    replaceChild: function replaceChild(newChild, oldChild) {
-      //raises
-      _insertBefore(this, newChild, oldChild, assertPreReplacementValidityInDocument);
-
-      newChild.ownerDocument = this;
-
-      if (oldChild) {
-        this.removeChild(oldChild);
-      }
-
-      if (isElementNode(newChild)) {
-        this.documentElement = newChild;
-      }
     },
     // Introduced in DOM Level 2:
     importNode: function importNode(importedNode, deep) {
@@ -35328,9 +34952,9 @@
 
   _extends(ProcessingInstruction, Node);
 
-  function XMLSerializer() {}
+  function XMLSerializer$1() {}
 
-  XMLSerializer.prototype.serializeToString = function (node, isHtml, nodeFilter) {
+  XMLSerializer$1.prototype.serializeToString = function (node, isHtml, nodeFilter) {
     return nodeSerializeToString.call(node, isHtml, nodeFilter);
   };
 
@@ -35393,21 +35017,14 @@
   }
   /**
    * Well-formed constraint: No < in Attribute Values
-   * > The replacement text of any entity referred to directly or indirectly
-   * > in an attribute value must not contain a <.
-   * @see https://www.w3.org/TR/xml11/#CleanAttrVals
-   * @see https://www.w3.org/TR/xml11/#NT-AttValue
-   *
-   * Literal whitespace other than space that appear in attribute values
-   * are serialized as their entity references, so they will be preserved.
-   * (In contrast to whitespace literals in the input which are normalized to spaces)
-   * @see https://www.w3.org/TR/xml11/#AVNormalize
-   * @see https://w3c.github.io/DOM-Parsing/#serializing-an-element-s-attributes
+   * The replacement text of any entity referred to directly or indirectly in an attribute value must not contain a <.
+   * @see https://www.w3.org/TR/xml/#CleanAttrVals
+   * @see https://www.w3.org/TR/xml/#NT-AttValue
    */
 
 
   function addSerializedAttribute(buf, qualifiedName, value) {
-    buf.push(' ', qualifiedName, '="', value.replace(/[<>&"\t\n\r]/g, _xmlEncoder), '"');
+    buf.push(' ', qualifiedName, '="', value.replace(/[<&"]/g, _xmlEncoder), '"');
   }
 
   function serializeToString(node, buf, isHTML, nodeFilter, visibleNamespaces) {
@@ -35508,7 +35125,7 @@
           }
 
           serializeToString(attr, buf, isHTML, nodeFilter, visibleNamespaces);
-        } // add namespace for current node
+        } // add namespace for current node		
 
 
         if (nodeName === prefixedNodeName && needNamespaceDefine(node, isHTML, visibleNamespaces)) {
@@ -35579,9 +35196,8 @@
          * and does not include the CDATA-section-close delimiter, `]]>`.
          *
          * @see https://www.w3.org/TR/xml/#NT-CharData
-         * @see https://w3c.github.io/DOM-Parsing/#xml-serializing-a-text-node
          */
-        return buf.push(node.data.replace(/[<&>]/g, _xmlEncoder));
+        return buf.push(node.data.replace(/[<&]/g, _xmlEncoder).replace(/]]>/g, ']]&gt;'));
 
       case CDATA_SECTION_NODE:
         return buf.push('<![CDATA[', node.data, ']]>');
@@ -35690,13 +35306,11 @@
     var node2 = new node.constructor();
 
     for (var n in node) {
-      if (Object.prototype.hasOwnProperty.call(node, n)) {
-        var v = node[n];
+      var v = node[n];
 
-        if (typeof v != "object") {
-          if (v != node2[n]) {
-            node2[n] = v;
-          }
+      if (typeof v != 'object') {
+        if (v != node2[n]) {
+          node2[n] = v;
         }
       }
     }
@@ -35809,16 +35423,16 @@
 
   var DocumentType_1 = DocumentType;
   var DOMException_1 = DOMException;
-  var DOMImplementation_1 = DOMImplementation$1;
+  var DOMImplementation_1$1 = DOMImplementation$1;
   var Element_1 = Element;
   var Node_1 = Node;
   var NodeList_1 = NodeList;
-  var XMLSerializer_1 = XMLSerializer; //}
+  var XMLSerializer_1 = XMLSerializer$1; //}
 
   var dom = {
     DocumentType: DocumentType_1,
     DOMException: DOMException_1,
-    DOMImplementation: DOMImplementation_1,
+    DOMImplementation: DOMImplementation_1$1,
     Element: Element_1,
     Node: Node_1,
     NodeList: NodeList_1,
@@ -36124,7 +35738,7 @@
 
   var S_TAG = 0; //tag name offerring
 
-  var S_ATTR = 1; //attr name offerring
+  var S_ATTR = 1; //attr name offerring 
 
   var S_ATTR_SPACE = 2; //attr name end and space offer
 
@@ -36187,7 +35801,7 @@
     function entityReplacer(a) {
       var k = a.slice(1, -1);
 
-      if (Object.hasOwnProperty.call(entityMap, k)) {
+      if (k in entityMap) {
         return entityMap[k];
       } else if (k.charAt(0) === '#') {
         return fixedFromCharCode(parseInt(k.substr(1).replace('x', '0x')));
@@ -36271,9 +35885,7 @@
 
               if (localNSMap) {
                 for (var prefix in localNSMap) {
-                  if (Object.prototype.hasOwnProperty.call(localNSMap, prefix)) {
-                    domBuilder.endPrefixMapping(prefix);
-                  }
+                  domBuilder.endPrefixMapping(prefix);
                 }
               }
 
@@ -36385,11 +35997,7 @@
         errorHandler.fatalError('Attribute ' + qname + ' redefined');
       }
 
-      el.addValue(qname, // @see https://www.w3.org/TR/xml/#AVNormalize
-      // since the xmldom sax parser does not "interpret" DTD the following is not implemented:
-      // - recursive replacement of (DTD) entity references
-      // - trimming and collapsing multiple spaces into a single one for attributes that are not of type CDATA
-      value.replace(/[\t\n\r]/g, ' ').replace(/&#?\w+;/g, entityReplacer), startIndex);
+      el.addValue(qname, value, startIndex);
     }
 
     var attrName;
@@ -36429,7 +36037,7 @@
               p = source.indexOf(c, start);
 
               if (p > 0) {
-                value = source.slice(start, p);
+                value = source.slice(start, p).replace(/&#?\w+;/g, entityReplacer);
                 addAttribute(attrName, value, start - 1);
                 s = S_ATTR_END;
               } else {
@@ -36437,8 +36045,10 @@
                 throw new Error('attribute value no end \'' + c + '\' match');
               }
             } else if (s == S_ATTR_NOQUOT_VALUE) {
-            value = source.slice(start, p);
-            addAttribute(attrName, value, start);
+            value = source.slice(start, p).replace(/&#?\w+;/g, entityReplacer); //console.log(attrName,value,start,p)
+
+            addAttribute(attrName, value, start); //console.dir(el)
+
             errorHandler.warning('attribute "' + attrName + '" missed start quot(' + c + ')!!');
             start = p + 1;
             s = S_ATTR_END;
@@ -36511,7 +36121,7 @@
 
               if (s == S_ATTR_NOQUOT_VALUE) {
                 errorHandler.warning('attribute "' + value + '" missed quot(")!');
-                addAttribute(attrName, value, start);
+                addAttribute(attrName, value.replace(/&#?\w+;/g, entityReplacer), start);
               } else {
                 if (!NAMESPACE$1.isHTML(currentNSMap['']) || !value.match(/^(?:disabled|checked|selected)$/i)) {
                   errorHandler.warning('attribute "' + value + '" missed value!! "' + value + '" instead!!');
@@ -36550,7 +36160,7 @@
                 break;
 
               case S_ATTR_NOQUOT_VALUE:
-                var value = source.slice(start, p);
+                var value = source.slice(start, p).replace(/&#?\w+;/g, entityReplacer);
                 errorHandler.warning('attribute "' + value + '" missed quot(")!!');
                 addAttribute(attrName, value, start);
 
@@ -36637,7 +36247,7 @@
       } //can not set prefix,because prefix !== ''
 
 
-      a.localName = localName; //prefix == null for no ns prefix attribute
+      a.localName = localName; //prefix == null for no ns prefix attribute 
 
       if (nsPrefix !== false) {
         //hack!!
@@ -36693,9 +36303,7 @@
 
       if (localNSMap) {
         for (prefix in localNSMap) {
-          if (Object.prototype.hasOwnProperty.call(localNSMap, prefix)) {
-            domBuilder.endPrefixMapping(prefix);
-          }
+          domBuilder.endPrefixMapping(prefix);
         }
       }
     } else {
@@ -36746,14 +36354,12 @@
       closeMap[tagName] = pos;
     }
 
-    return pos < elStartEnd; //}
+    return pos < elStartEnd; //} 
   }
 
   function _copy(source, target) {
     for (var n in source) {
-      if (Object.prototype.hasOwnProperty.call(source, n)) {
-        target[n] = source[n];
-      }
+      target[n] = source[n];
     }
   }
 
@@ -36786,7 +36392,7 @@
           domBuilder.endCDATA();
           return end + 3;
         } //<!DOCTYPE
-        //startDTD(java.lang.String name, java.lang.String publicId, java.lang.String systemId)
+        //startDTD(java.lang.String name, java.lang.String publicId, java.lang.String systemId) 
 
 
         var matchs = split(source, start);
@@ -36877,7 +36483,7 @@
       return this[i].value;
     } //	,getIndex:function(uri, localName)){
     //		if(localName){
-    //
+    //			
     //		}else{
     //			var qName = uri
     //		}
@@ -36912,63 +36518,6 @@
   var NAMESPACE = conventions.NAMESPACE;
   var ParseError = sax.ParseError;
   var XMLReader = sax.XMLReader;
-  /**
-   * Normalizes line ending according to https://www.w3.org/TR/xml11/#sec-line-ends:
-   *
-   * > XML parsed entities are often stored in computer files which,
-   * > for editing convenience, are organized into lines.
-   * > These lines are typically separated by some combination
-   * > of the characters CARRIAGE RETURN (#xD) and LINE FEED (#xA).
-   * >
-   * > To simplify the tasks of applications, the XML processor must behave
-   * > as if it normalized all line breaks in external parsed entities (including the document entity)
-   * > on input, before parsing, by translating all of the following to a single #xA character:
-   * >
-   * > 1. the two-character sequence #xD #xA
-   * > 2. the two-character sequence #xD #x85
-   * > 3. the single character #x85
-   * > 4. the single character #x2028
-   * > 5. any #xD character that is not immediately followed by #xA or #x85.
-   *
-   * @param {string} input
-   * @returns {string}
-   */
-
-  function normalizeLineEndings(input) {
-    return input.replace(/\r[\n\u0085]/g, '\n').replace(/[\r\u0085\u2028]/g, '\n');
-  }
-  /**
-   * @typedef Locator
-   * @property {number} [columnNumber]
-   * @property {number} [lineNumber]
-   */
-
-  /**
-   * @typedef DOMParserOptions
-   * @property {DOMHandler} [domBuilder]
-   * @property {Function} [errorHandler]
-   * @property {(string) => string} [normalizeLineEndings] used to replace line endings before parsing
-   * 						defaults to `normalizeLineEndings`
-   * @property {Locator} [locator]
-   * @property {Record<string, string>} [xmlns]
-   *
-   * @see normalizeLineEndings
-   */
-
-  /**
-   * The DOMParser interface provides the ability to parse XML or HTML source code
-   * from a string into a DOM `Document`.
-   *
-   * _xmldom is different from the spec in that it allows an `options` parameter,
-   * to override the default behavior._
-   *
-   * @param {DOMParserOptions} [options]
-   * @constructor
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/DOMParser
-   * @see https://html.spec.whatwg.org/multipage/dynamic-markup-insertion.html#dom-parsing-and-serialization
-   */
-
 
   function DOMParser$1(options) {
     this.options = options || {
@@ -37000,12 +36549,11 @@
     }
 
     defaultNSMap.xml = defaultNSMap.xml || NAMESPACE.XML;
-    var normalize = options.normalizeLineEndings || normalizeLineEndings;
 
     if (source && typeof source === 'string') {
-      sax.parse(normalize(source), defaultNSMap, entityMap);
+      sax.parse(source, defaultNSMap, entityMap);
     } else {
-      sax.errorHandler.error('invalid doc source');
+      sax.errorHandler.error("invalid doc source");
     }
 
     return domBuilder.doc;
@@ -37245,17 +36793,27 @@
 
 
   var __DOMHandler = DOMHandler;
-  var normalizeLineEndings_1 = normalizeLineEndings;
   var DOMParser_1 = DOMParser$1;
+  /**
+   * @deprecated Import/require from main entry point instead
+   */
+
+  var DOMImplementation_1 = dom.DOMImplementation;
+  /**
+   * @deprecated Import/require from main entry point instead
+   */
+
+  var XMLSerializer = dom.XMLSerializer;
   var domParser = {
     __DOMHandler: __DOMHandler,
-    normalizeLineEndings: normalizeLineEndings_1,
-    DOMParser: DOMParser_1
+    DOMParser: DOMParser_1,
+    DOMImplementation: DOMImplementation_1,
+    XMLSerializer: XMLSerializer
   };
 
   var DOMParser = domParser.DOMParser;
 
-  /*! @name mpd-parser @version 0.22.1 @license Apache-2.0 */
+  /*! @name mpd-parser @version 0.21.1 @license Apache-2.0 */
 
   var isObject = function isObject(obj) {
     return !!obj && typeof obj === 'object';
@@ -38346,10 +37904,6 @@
       segments: segments
     };
 
-    if (attributes.frameRate) {
-      playlist.attributes['FRAME-RATE'] = attributes.frameRate;
-    }
-
     if (attributes.contentProtection) {
       playlist.contentProtection = attributes.contentProtection;
     }
@@ -39007,20 +38561,6 @@
   var getContent = function getContent(element) {
     return element.textContent.trim();
   };
-  /**
-   * Converts the provided string that may contain a division operation to a number.
-   *
-   * @param {string} value - the provided string value
-   *
-   * @return {number} the parsed string value
-   */
-
-
-  var parseDivisionValue = function parseDivisionValue(value) {
-    return parseFloat(value.split('/').reduce(function (prev, current) {
-      return prev / current;
-    }));
-  };
 
   var parseDuration = function parseDuration(str) {
     var SECONDS_IN_YEAR = 365 * 24 * 60 * 60;
@@ -39187,18 +38727,6 @@
      */
     bandwidth: function bandwidth(value) {
       return parseInt(value, 10);
-    },
-
-    /**
-     * Specifies the frame rate of the representation
-     *
-     * @param {string} value
-     *        value of attribute as a string
-     * @return {number}
-     *         The parsed frame rate
-     */
-    frameRate: function frameRate(value) {
-      return parseDivisionValue(value);
     },
 
     /**
@@ -40726,12 +40254,12 @@
   };
   var clock_1 = clock.ONE_SECOND_IN_TS;
 
-  /*! @name @videojs/http-streaming @version 2.15.1 @license Apache-2.0 */
+  /*! @name @videojs/http-streaming @version 2.14.3 @license Apache-2.0 */
   /**
    * @file resolve-url.js - Handling how URLs are resolved and manipulated
    */
 
-  var resolveUrl = resolveUrl$1;
+  var resolveUrl = resolveUrl$2;
   /**
    * Checks whether xhr request was redirected and returns correct url depending
    * on `handleManifestRedirects` option
@@ -44837,7 +44365,7 @@
   var getWorkerString = function getWorkerString(fn) {
     return fn.toString().replace(/^function.+?{/, '').slice(0, -1);
   };
-  /* rollup-plugin-worker-factory start for worker!/Users/gkatsevman/p/http-streaming/src/transmuxer-worker.js */
+  /* rollup-plugin-worker-factory start for worker!/Users/abarstow/videojs/http-streaming/src/transmuxer-worker.js */
 
 
   var workerCode$1 = transform(getWorkerString(function () {
@@ -53643,7 +53171,7 @@
     };
   }));
   var TransmuxWorker = factory(workerCode$1);
-  /* rollup-plugin-worker-factory end for worker!/Users/gkatsevman/p/http-streaming/src/transmuxer-worker.js */
+  /* rollup-plugin-worker-factory end for worker!/Users/abarstow/videojs/http-streaming/src/transmuxer-worker.js */
 
   var handleData_ = function handleData_(event, transmuxedData, callback) {
     var _event$data$segment = event.data.segment,
@@ -58708,7 +58236,6 @@
       this.bandwidth = 1;
       this.roundTrip = NaN;
       this.trigger('bandwidthupdate');
-      this.trigger('timeout');
     }
     /**
      * Handle the callback from the segmentRequest function and set the
@@ -61436,7 +60963,7 @@
 
     return TimelineChangeController;
   }(videojs.EventTarget);
-  /* rollup-plugin-worker-factory start for worker!/Users/gkatsevman/p/http-streaming/src/decrypter-worker.js */
+  /* rollup-plugin-worker-factory start for worker!/Users/abarstow/videojs/http-streaming/src/decrypter-worker.js */
 
 
   var workerCode = transform(getWorkerString(function () {
@@ -62139,7 +61666,7 @@
     };
   }));
   var Decrypter = factory(workerCode);
-  /* rollup-plugin-worker-factory end for worker!/Users/gkatsevman/p/http-streaming/src/decrypter-worker.js */
+  /* rollup-plugin-worker-factory end for worker!/Users/abarstow/videojs/http-streaming/src/decrypter-worker.js */
 
   /**
    * Convert the properties of an HLS track into an audioTrackKind.
@@ -63366,20 +62893,16 @@
     /**
      * Run selectPlaylist and switch to the new playlist if we should
      *
-     * @param {string} [reason=abr] a reason for why the ABR check is made
      * @private
+     *
      */
     ;
 
-    _proto.checkABR_ = function checkABR_(reason) {
-      if (reason === void 0) {
-        reason = 'abr';
-      }
-
+    _proto.checkABR_ = function checkABR_() {
       var nextPlaylist = this.selectPlaylist();
 
       if (nextPlaylist && this.shouldSwitchToMedia_(nextPlaylist)) {
-        this.switchMedia_(nextPlaylist, reason);
+        this.switchMedia_(nextPlaylist, 'abr');
       }
     };
 
@@ -63631,9 +63154,7 @@
           _this3.requestOptions_.timeout = 0;
         } else {
           _this3.requestOptions_.timeout = requestTimeout;
-        }
-
-        _this3.masterPlaylistLoader_.load(); // TODO: Create a new event on the PlaylistLoader that signals
+        } // TODO: Create a new event on the PlaylistLoader that signals
         // that the segments have changed in some way and use that to
         // update the SegmentLoader instead of doing it twice here and
         // on `loadedplaylist`
@@ -63837,25 +63358,16 @@
     _proto.setupSegmentLoaderListeners_ = function setupSegmentLoaderListeners_() {
       var _this4 = this;
 
-      this.mainSegmentLoader_.on('bandwidthupdate', function () {
-        // Whether or not buffer based ABR or another ABR is used, on a bandwidth change it's
-        // useful to check to see if a rendition switch should be made.
-        _this4.checkABR_('bandwidthupdate');
-
-        _this4.tech_.trigger('bandwidthupdate');
-      });
-      this.mainSegmentLoader_.on('timeout', function () {
-        if (_this4.experimentalBufferBasedABR) {
-          // If a rendition change is needed, then it would've be done on `bandwidthupdate`.
-          // Here the only consideration is that for buffer based ABR there's no guarantee
-          // of an immediate switch (since the bandwidth is averaged with a timeout
-          // bandwidth value of 1), so force a load on the segment loader to keep it going.
-          _this4.mainSegmentLoader_.load();
-        }
-      }); // `progress` events are not reliable enough of a bandwidth measure to trigger buffer
-      // based ABR.
-
       if (!this.experimentalBufferBasedABR) {
+        this.mainSegmentLoader_.on('bandwidthupdate', function () {
+          var nextPlaylist = _this4.selectPlaylist();
+
+          if (_this4.shouldSwitchToMedia_(nextPlaylist)) {
+            _this4.switchMedia_(nextPlaylist, 'bandwidthupdate');
+          }
+
+          _this4.tech_.trigger('bandwidthupdate');
+        });
         this.mainSegmentLoader_.on('progress', function () {
           _this4.trigger('progress');
         });
@@ -65152,7 +64664,6 @@
       this.width = resolution && resolution.width;
       this.height = resolution && resolution.height;
       this.bandwidth = playlist.attributes.BANDWIDTH;
-      this.frameRate = playlist.attributes['FRAME-RATE'];
     }
 
     this.codecs = codecsForPlaylist(mpc.master(), playlist);
@@ -65991,10 +65502,10 @@
     initPlugin(this, options);
   };
 
-  var version$4 = "2.15.1";
+  var version$4 = "2.14.3";
   var version$3 = "6.0.1";
-  var version$2 = "0.22.1";
-  var version$1 = "4.8.0";
+  var version$2 = "0.21.1";
+  var version$1 = "4.7.1";
   var version = "3.1.3";
   var Vhs = {
     PlaylistLoader: PlaylistLoader,

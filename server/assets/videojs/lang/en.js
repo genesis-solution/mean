@@ -114,13 +114,14 @@ videojs.addLanguage("en",{
   "Start AirPlay": "Start AirPlay",
   "Casting to": "Casting to",
   "Open Chromecast menu": "Open Chromecast menu",
-  
   "Skip Ad in": "Skip Ad in",
   "Skip Now!": "Skip Now!",
   "Watch full video on": "Watch full video on" ,
   "Casting to": "Casting to",
   "Skip Ad in %%TIME%%": "Skip Ad in %%TIME%%",
   "Skip Ad": "Skip Ad",
+   "Ad": "Ad",
+  "%%CURRENT%% of %%TOTAL%%": "%%CURRENT%% of %%TOTAL%%", 
   "Snapshot": "Snapshot",
   "This Ad will end in": "This Ad will end in",
   "Ad Playing": "Ad Playing"
