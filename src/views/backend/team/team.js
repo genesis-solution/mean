@@ -110,7 +110,7 @@ const TeamPage = ({ history, getTeamVideos, teamVideos }) => {
   const [selectedStream, setSelectedStream] = useState({});
 
   useEffect(() => {
-    const publish_point = (window.history.location.pathname).split("/")[2];
+    const publish_point = (history.location.pathname).split("/")[2];
     getTeamVideos("/" + publish_point);
   }, []);
 

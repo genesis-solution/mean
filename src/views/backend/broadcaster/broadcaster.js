@@ -114,7 +114,7 @@ const BroadcasterPage = ({
   const [selectedStream, setSelectedStream] = useState({});
 
   useEffect(() => {
-    const publish_point = (window.history.location.pathname).split("/")[2];
+    const publish_point = (history.location.pathname).split("/")[2];
     getBroadcasterVideos("/" + publish_point);
   }, []);
 
