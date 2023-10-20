@@ -149,7 +149,7 @@ const LiveList = ({ liveStreams, getLiveStreams }) => {
                           <SwiperSlide className="slide-item" key={index}>
                             <Link
                               to={
-                                "/live-details/" + stream.type + "/" + stream.stream_id
+                                "/live-details/" + stream.type + "/" + stream.id
                               }
                             >
                               <div
