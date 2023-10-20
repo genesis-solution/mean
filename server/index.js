@@ -45,7 +45,7 @@ const websitePort = process.env.REACT_APP_WEBSITE_PORT || 3000;
 const websiteDomain =
   process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com`;
 const laravelApi =
-  process.env.LARAVEL_API || `https://btc.cdn.playfullscreen.com:3000`;
+  process.env.LARAVEL_API || `https://dashboard.btc.cdn.playfullscreen.com`;
 const connectionURI = process.env.SUPERTOKEN_CONNECTION_URI;
 const apiKey = process.env.SUPERTOKEN_API_KEY;
 const twilioAccountSid = process.env.TWILIO_ACCOUNTSID;
@@ -154,7 +154,7 @@ var httpsServer = https.createServer(credentials, app);
 // );
 app.use(cors(
   {
-    "origin": ["https://btc.cdn.playfullscreen.com", "https://player.castr.com"],
+    "origin": ["https://btc.cdn.playfullscreen.com", "https://player.castr.com", "https://dashboard.btc.cdn.playfullscreen.com"],
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
     "credentials": true
@@ -185,10 +185,10 @@ app.get("/sessioninfo", verifySession(), async (req, res) => {
 app.use("/users", usersRouter);
 app.use("/videos", videosRouter);
 
-app.use("/", express.static(path.join(__dirname, "public", "build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "public", "build", "index.html"));
-  });
+// app.use("/", express.static(path.join(__dirname, "public", "build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "public", "build", "index.html"));
+//   });
 
 app.use(errorHandler());
 

@@ -61,7 +61,7 @@ Broadcaster.findByPublishPoint = (publish_point, result) => {
 };
 
 Broadcaster.findLive = (result) => {
-  sql.query(`SELECT id, name, description, logo_id, stream_id FROM broadcasters WHERE stream_key != ''`, (err, res) => {
+  sql.query(`SELECT id, name, description, logo_id, stream_id FROM broadcasters WHERE stream_key == ''`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
