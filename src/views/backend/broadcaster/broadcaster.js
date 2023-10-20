@@ -114,7 +114,12 @@ const BroadcasterPage = ({
   const [selectedStream, setSelectedStream] = useState({});
 
   useEffect(() => {
-    const publish_point = (history.location.pathname).split("/")[2];
+    const url = window.location.href;
+    const cleanedURL = url.replace(/^(http:\/\/|https:\/\/)/, '');
+
+    // Use the cleanedURL in your logic
+    console.log(cleanedURL);
+    const publish_point = cleanedURL.split("/")[2];
     getBroadcasterVideos("/" + publish_point);
   }, []);
 

@@ -33,9 +33,14 @@ const LiveDetails = ({
   const searchParams = new URLSearchParams(location.search);
   let channel_name = searchParams.get("channel_name");
   if (!channel_name) {
-    console.log("channel_name error");
+    console.log("channel_name not exist");
     // https://btc.cdn.playfullscreen.com/live-details/broadcaster/6531cb7ccc9b9d2310f5cd12
-    const id = (history.location.pathname).split("/")[3];
+    const url = window.location.href;
+    const cleanedURL = url.replace(/^(http:\/\/|https:\/\/)/, '');
+
+    // Use the cleanedURL in your logic
+    console.log(cleanedURL);
+    const id = cleanedURL.split("/")[3]; // (history.location.pathname)
     // const url = window.location.href;
     // const regex = /\/live-details\/broadcaster\/(\w+)/;
     // const match = url.match(regex);
@@ -62,9 +67,13 @@ const LiveDetails = ({
     // const regex = /\/live-details\/broadcaster\/(\w+)/;
     // const match = url.match(regex);
     // const id = match ? match[0] : null;
-    console.log(history.location.pathname)
-    const id = (history.location.pathname).split("/")[3];
-    const type = (history.location.pathname).split("/")[2];
+    const url = window.location.href;
+    const cleanedURL = url.replace(/^(http:\/\/|https:\/\/)/, '');
+
+    // Use the cleanedURL in your logic
+    console.log(cleanedURL);
+    const id = cleanedURL.split("/")[3]; // (history.location.pathname)
+    const type = cleanedURL.split("/")[2];
     getStreamInfo({ id, type });
 
     var elements = document.getElementsByClassName("item-end");
