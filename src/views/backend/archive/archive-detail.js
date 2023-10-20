@@ -69,12 +69,6 @@ const ArchiveDetails = ({
               archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
             );
   
-            const nuevoOptions = {
-              title: archiveinfo.title,
-            };
-            console.log('dispose')
-            player.nuevo(nuevoOptions)
-  
             var callback = function (player, hlsjs) {
               hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
                 console.log("Media attached");
@@ -87,6 +81,12 @@ const ArchiveDetails = ({
               type: "application/x-mpegURL",
               poster: archiveinfo.poster,
             });
+
+            const nuevoOptions = {
+              title: archiveinfo.title,
+            };
+            console.log('dispose')
+            player.nuevo(nuevoOptions)
           }
         );
 
