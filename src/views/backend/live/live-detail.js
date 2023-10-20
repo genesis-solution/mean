@@ -34,7 +34,12 @@ const LiveDetails = ({
   let channel_name = searchParams.get("channel_name");
   if (!channel_name) {
     console.log("channel_name error");
-    const id = history.location.pathname.split("/")[3];
+    // https://btc.cdn.playfullscreen.com/live-details/broadcaster/6531cb7ccc9b9d2310f5cd12
+    const id = window.history.location.pathname.split("/")[3];
+    // const url = window.location.href;
+    // const regex = /\/live-details\/broadcaster\/(\w+)/;
+    // const match = url.match(regex);
+    // const id = match ? match[0] : null;
     channel_name = "playfull_" + id;
   }
   useScript({
@@ -53,8 +58,12 @@ const LiveDetails = ({
       if (item.nodeName == "DIV") item.style.visibility = "visible";
     }
 
-    const id = history.location.pathname.split("/")[3];
-    const type = history.location.pathname.split("/")[2];
+    // const url = window.location.href;
+    // const regex = /\/live-details\/broadcaster\/(\w+)/;
+    // const match = url.match(regex);
+    // const id = match ? match[0] : null;
+    const id = window.history.location.pathname.split("/")[3];
+    const type = window.history.location.pathname.split("/")[2];
     getStreamInfo({ id, type });
 
     var elements = document.getElementsByClassName("item-end");
