@@ -9,13 +9,14 @@ import "swiper/swiper-bundle.css";
 import { videoActions } from "../../../store/video";
 import { thumbUrl } from "../../../const/const";
 //video.js player
+
 import "../../../assets/videojs/skins/shaka/videojs.min.css";
+import "../../../assets/chatbox/customize.css";
 import Hls from "hls.js";
 import videojs from "video.js";
-import "../../../assets/videojs/components/videojs.events.js";
 import "../../../assets/videojs/components/hlsjs.js";
 import "../../../assets/videojs/components/nuevo.js";
-import "../../../assets/videojs/components/cjs/nuevo.js";
+import "../../../assets/videojs/components/videojs.events.js";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -53,49 +54,45 @@ const ArchiveDetails = ({
       }
       else
       {
-        
+        player = videojs(
+          videoContainer.current,
+          {
+            controls: true,
+            preload: true,
+            playsinilie: true,
+            autoplay: true,
+          },
+          function onPlayerReady() {
+            console.log("Player Ready!");
 
-        if (!player.current && videoContainer) {
-          player = videojs(
-            videoContainer.current,
-            {
-              controls: true,
-              preload: true,
-              playsinilie: true,
-              autoplay: true,
-            },
-            function onPlayerReady() {
-              console.log("Player Ready!");
-
-              player.poster(
-                archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
-              );
-    
-              const nuevoOptions = {
-                title: archiveinfo.title,
-              };
-              console.log('dispose')
-              player.nuevo(nuevoOptions)
-    
-              var callback = function (player, hlsjs) {
-                hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
-                  console.log("Media attached");
-                });
-              };
-              videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
-    
-              player.src({
-                src: archiveinfo.hlsUrl,
-                type: "application/x-mpegURL",
-                poster: archiveinfo.poster,
+            player.poster(
+              archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
+            );
+  
+            const nuevoOptions = {
+              title: archiveinfo.title,
+            };
+            console.log('dispose')
+            player.nuevo(nuevoOptions)
+  
+            var callback = function (player, hlsjs) {
+              hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
+                console.log("Media attached");
               });
-            }
-          );
-        }
+            };
+            videojs.Html5Hlsjs.addHook("beforeinitialize", callback);
+  
+            player.src({
+              src: archiveinfo.hlsUrl,
+              type: "application/x-mpegURL",
+              poster: archiveinfo.poster,
+            });
+          }
+        );
 
       }
     }
-  }, [ videoContainer, archiveinfo]);
+  }, [ archiveinfo]);
 
   return (
     <>
