@@ -43,9 +43,9 @@ const apiPort = process.env.REACT_APP_API_PORT || 3001;
 const apiDomain = process.env.REACT_APP_API_URL || `https://btc.cdn.playfullscreen.com:3001`;
 const websitePort = process.env.REACT_APP_WEBSITE_PORT || 3000;
 const websiteDomain =
-  process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com:3001`;
+  process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com`;
 const laravelApi =
-  process.env.LARAVEL_API || `https://btc.cdn.playfullscreen.com:3001`;
+  process.env.LARAVEL_API || `https://btc.cdn.playfullscreen.com:3000`;
 const connectionURI = process.env.SUPERTOKEN_CONNECTION_URI;
 const apiKey = process.env.SUPERTOKEN_API_KEY;
 const twilioAccountSid = process.env.TWILIO_ACCOUNTSID;

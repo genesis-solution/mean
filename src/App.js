@@ -30,7 +30,7 @@ export function getApiDomain() {
 }
 
 export function getWebsiteDomain() {
-  const websiteUrl = process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com:3001`;
+  const websiteUrl = process.env.REACT_APP_WEBSITE_URL || `https://btc.cdn.playfullscreen.com`;
   return websiteUrl;
 }
 
