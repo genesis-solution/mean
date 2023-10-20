@@ -37,11 +37,7 @@ const ArchiveDetails = ({
     getArchiveInfo({ id, type:'archive' });
     return () => {
       if (player && archiveinfo) {
-        const nuevoOptions = {
-          title: archiveinfo.title,
-        };
-        console.log('dispose')
-        player.nuevo(nuevoOptions)
+        
         player.dispose();
         
         // player.current = null;
@@ -75,7 +71,11 @@ const ArchiveDetails = ({
                 archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
               );
     
-              //player.nuevo(nuevoOptions);
+              const nuevoOptions = {
+                title: archiveinfo.title,
+              };
+              console.log('dispose')
+              player.nuevo(nuevoOptions)
     
               var callback = function (player, hlsjs) {
                 hlsjs.on(Hls.Events.MEDIA_ATTACHED, function (event, data) {
