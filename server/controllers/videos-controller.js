@@ -1168,7 +1168,7 @@ exports.getArchiveInfo = async (req, res) => {
                   hlsUrl:
                     "https://vz-7ab8c5be-62f.b-cdn.net/" + id + "/playlist.m3u8",
                   poster:
-                    "https://dashboard.playfullscreen.a2hosted.com" +
+                    "https://btc.cdn.playfullscreen.com" +
                     "/images/" +
                     id +
                     ".png",

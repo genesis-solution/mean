@@ -35,19 +35,19 @@ const ArchiveDetails = ({
     const id = currentUrl.split('/').pop();
     
     getArchiveInfo({ id, type:'archive' });
-    // return () => {
-    //   if (player && archiveinfo) {
-    //     const nuevoOptions = {
-    //       title: archiveinfo.title,
-    //     };
-    //     console.log('dispose')
-    //     player.nuevo(nuevoOptions)
-    //     player.dispose();
+    return () => {
+      if (player && archiveinfo) {
+        const nuevoOptions = {
+          title: archiveinfo.title,
+        };
+        console.log('dispose')
+        player.nuevo(nuevoOptions)
+        player.dispose();
         
-    //     // player.current = null;
-    //   }
-    //   clearArchiveInfo();
-    // };
+        // player.current = null;
+      }
+      clearArchiveInfo();
+    };
   }, []);
 
   useEffect(() => {
@@ -91,20 +91,6 @@ const ArchiveDetails = ({
               });
             }
           );
-
-          return () => {
-            if (player && archiveinfo) {
-              const nuevoOptions = {
-                title: archiveinfo.title,
-              };
-              console.log('dispose')
-              player.nuevo(nuevoOptions)
-              player.dispose();
-              
-              // player.current = null;
-            }
-            clearArchiveInfo();
-          };
         }
 
       }
