@@ -65,6 +65,12 @@ const ArchiveDetails = ({
           function onPlayerReady() {
             console.log("Player Ready!");
 
+            player.nuevo({
+              title: archiveinfo.name,
+              video_id: "This is video Id",
+            });
+
+
             player.poster(
               archiveinfo.poster ? archiveinfo.poster : "https://cdnzone.nuevodevel.com/video/hls/tears/poster.jpg"
             );
@@ -81,12 +87,6 @@ const ArchiveDetails = ({
               type: "application/x-mpegURL",
               poster: archiveinfo.poster,
             });
-
-            const nuevoOptions = {
-              title: archiveinfo.title,
-            };
-            console.log('dispose')
-            player.nuevo(nuevoOptions)
           }
         );
 
@@ -96,8 +96,8 @@ const ArchiveDetails = ({
 
   return (
     <>
-      <div className="video-container iq-main-slider" data-vjs-player>
-        <video className="video-js vjs-fluid" ref={videoContainer} id='my-player'></video>
+      <div className="video-container iq-main-slider">
+        <video className="video-js vjs-fluid" ref={videoContainer}></video>
       </div>
       <div className="main-content movi">
         <section className="movie-detail container-fluid">
