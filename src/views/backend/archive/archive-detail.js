@@ -13,10 +13,10 @@ import { thumbUrl } from "../../../const/const";
 import "../../../assets/videojs/skins/shaka/videojs.min.css";
 import "../../../assets/chatbox/customize.css";
 import Hls from "hls.js";
+import videojs from "video.js";
 import "../../../assets/videojs/components/hlsjs.js";
 import "../../../assets/videojs/components/nuevo.js";
 import "../../../assets/videojs/components/videojs.events.js";
-import videojs from "video.js";
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -65,10 +65,14 @@ const ArchiveDetails = ({
           function onPlayerReady() {
             console.log("Player Ready!");
 
-            player.nuevo({
-              title: archiveinfo.title,
-              video_id: "This is video Id",
-            });
+            try {
+              player.nuevo({
+                title: archiveinfo.title,
+                video_id: "This is video Id",
+              });
+            } catch (error) {
+              console.log(error)
+            }
 
 
             player.poster(
