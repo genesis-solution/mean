@@ -26,6 +26,8 @@
     "mysql": "^2.18.1",
     "node-fetch": "2",
     "request": "^2.88.2",
+    "socket.io": "4.8.1",
+    "socket.io-client": "4.8.1",
     "stripe": "^12.5.0",
     "supertokens-node": "^12.1.5"
   }

@@ -65,14 +65,10 @@ const ArchiveDetails = ({
           function onPlayerReady() {
             console.log("Player Ready!");
 
-            try {
-              player.nuevo({
-                title: archiveinfo.title,
-                video_id: "This is video Id",
-              });
-            } catch (error) {
-              console.log(error)
-            }
+            // player.nuevo({
+            //   title: archiveinfo.title,
+            //   video_id: "This is video Id",
+            // });
 
 
             player.poster(
